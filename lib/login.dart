@@ -1,5 +1,7 @@
 import 'package:flock_flutter/home.dart';
+import 'package:flock_flutter/shared/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 // --- Login Page ---
 class LoginPage extends StatefulWidget {
@@ -22,7 +24,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(), // Provides a back button to the WelcomePage
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF4FDDF),
+      ), // Provides a back button to the WelcomePage
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -36,7 +40,13 @@ class _LoginPageState extends State<LoginPage> {
                   Text(
                     'Log In',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: TextStyle(
+                      fontFamily: 'FlockFont',
+                      fontSize: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.fontSize,
+                      color: Colors.black, // If you declared a bold variant
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -119,13 +129,19 @@ class _LoginPageState extends State<LoginPage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      _buildSocialButton('Google', () {
-                        // TODO: Implement Google Sign-In
-                      }),
+                      SocialLoginButton(
+                        type: 'Google',
+                        onPressed: () {
+                          // TODO: Implement Google Sign-In
+                        },
+                      ),
                       const SizedBox(width: 16),
-                      _buildSocialButton('Apple', () {
-                        // TODO: Implement Apple Sign-In
-                      }),
+                      SocialLoginButton(
+                        type: 'Apple',
+                        onPressed: () {
+                          // TODO: Implement Apple Sign-In
+                        },
+                      ),
                     ],
                   ),
                   const SizedBox(height: 40),
@@ -134,38 +150,6 @@ class _LoginPageState extends State<LoginPage> {
             ),
           ),
         ),
-      ),
-    );
-  }
-
-  // Helper widget to build social login buttons
-  Widget _buildSocialButton(String label, VoidCallback onPressed) {
-    return OutlinedButton(
-      onPressed: onPressed,
-      style: OutlinedButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
-        ),
-        side: BorderSide(color: Colors.grey.shade400),
-      ),
-      child: Row(
-        children: [
-          // Using an icon as a placeholder.
-          Icon(
-            label == 'Google' ? Icons.android : Icons.apple,
-            size: 24,
-            color: Colors.black,
-          ),
-          const SizedBox(width: 12),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
       ),
     );
   }

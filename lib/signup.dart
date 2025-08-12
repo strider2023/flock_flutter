@@ -1,3 +1,4 @@
+import 'package:flock_flutter/home.dart';
 import 'package:flutter/material.dart';
 
 // --- Sign Up Page ---
@@ -21,7 +22,9 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(), // Provides a back button
+      appBar: AppBar(
+        backgroundColor: Color(0xFFF4FDDF),
+      ), // Provides a back button
       body: SafeArea(
         child: Center(
           child: SingleChildScrollView(
@@ -35,7 +38,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   Text(
                     'Create Account',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.headlineSmall,
+                    style: TextStyle(
+                      fontFamily: 'FlockFont',
+                      fontSize: Theme.of(
+                        context,
+                      ).textTheme.headlineMedium?.fontSize,
+                      color: Colors.black, // If you declared a bold variant
+                    ),
                   ),
                   const SizedBox(height: 8),
                   Text(
@@ -49,6 +58,13 @@ class _SignUpPageState extends State<SignUpPage> {
                   const TextField(
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(labelText: 'Full Name'),
+                  ),
+                  const SizedBox(height: 16),
+
+                  // --- Phone Number Input Field ---
+                  const TextField(
+                    keyboardType: TextInputType.name,
+                    decoration: InputDecoration(labelText: 'Phone'),
                   ),
                   const SizedBox(height: 16),
 
@@ -84,7 +100,15 @@ class _SignUpPageState extends State<SignUpPage> {
 
                   // --- Sign Up Button ---
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      // Navigate to HomePage on login
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const HomePage(),
+                        ),
+                      );
+                    },
                     child: const Text('Sign Up'),
                   ),
                   const SizedBox(height: 40),

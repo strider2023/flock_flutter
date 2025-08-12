@@ -1,10 +1,13 @@
-// --- Feed Page (Extracted from HomePage) ---
+import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flock_flutter/models/carousel_item.dart';
 import 'package:flock_flutter/models/feed_item.dart';
 import 'package:flock_flutter/shared/components/filter_panel.dart';
-import 'package:flock_flutter/shared/widgets/carousel_item_card.dart';
+import 'package:flock_flutter/shared/components/carousel_item_card.dart';
+import 'package:flock_flutter/shared/components/feed_item_card.dart';
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 
 class FeedPage extends StatefulWidget {
   const FeedPage({super.key});
@@ -80,7 +83,7 @@ class _FeedPageState extends State<FeedPage> {
       setState(() {
         _activeCampaignFilter = result['campaign'];
         _activeLikeSortOrder = result['sort'];
-        _applyFilters();
+        // _applyFilters();
       });
     }
   }
@@ -91,39 +94,54 @@ class _FeedPageState extends State<FeedPage> {
       body: CustomScrollView(
         slivers: <Widget>[
           SliverAppBar(
-            backgroundColor: Colors.white,
-            title: _buildSearchField(),
+            title: Text('Flock'),
+            // Actions remain on the right.
             actions: [
               IconButton(
-                icon: const Icon(Icons.notifications_none, color: Colors.black),
-                onPressed: () {},
+                icon: const Iconify(Ri.notification_2_fill),
+                onPressed: () {
+                  // TODO: Handle notifications tap
+                },
               ),
               IconButton(
-                icon: const Icon(Icons.filter_list, color: Colors.black),
+                icon: Iconify(Ri.filter_3_fill),
                 onPressed: _showFilterPanel,
               ),
             ],
+            // These properties ensure the app bar hides on scroll.
             floating: true,
-            pinned: true,
+            pinned: false,
             snap: true,
+            // Removes the default back button if any.
             automaticallyImplyLeading: false,
+            // Adding elevation properties for a cleaner, flatter look.
+            elevation: 0,
+            scrolledUnderElevation: 0,
           ),
           SliverToBoxAdapter(child: _buildCarousel()),
-          SliverPersistentHeader(
-            pinned: true,
-            delegate: _SliverAppBarDelegate(
-              child: Container(
-                color: Colors.white,
-                child: _buildCategoryList(),
-              ),
-            ),
-          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (BuildContext context, int index) {
+                // Total number of items
+                const int itemCount = 10;
+
+                // Check if the current item is the last one
+                if (index == itemCount - 1) {
+                  // If it's the last item, return a Column with the card and a SizedBox
+                  return Column(
+                    children: [
+                      _buildFeedCard(index),
+                      const SizedBox(
+                        height: 100,
+                      ), // Your desired extra space at the end
+                    ],
+                  );
+                }
+
+                // For all other items, return the card as usual
                 return _buildFeedCard(index);
               },
-              childCount: 10, // Example number of feed items
+              childCount: 10, // The childCount remains the same
             ),
           ),
         ],
@@ -131,41 +149,30 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  Widget _buildSearchField() {
-    return TextField(
-      decoration: InputDecoration(
-        hintText: 'Search...',
-        prefixIcon: const Icon(Icons.search, color: Colors.grey),
-        filled: true,
-        fillColor: Colors.grey[200],
-        contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 15),
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
-        ),
-      ),
-    );
-  }
+  // The _buildSearchField method has been removed as it's no longer needed.
 
   Widget _buildCarousel() {
     final List<CarouselItem> carouselItems = [
       CarouselItem(
         title: 'Project Alpha',
         description: 'A revolutionary new way to\nmanage your daily tasks.',
-        imageUrl: 'https://placehold.co/300x300/png',
+        imageUrl:
+            'https://static.vecteezy.com/system/resources/thumbnails/034/630/930/small_2x/elegant-decorative-vases-and-planters-with-succulents-and-other-plants-on-transparent-background-interior-accessories-cut-out-home-decor-front-view-ai-generated-png.png',
         backgroundColor: Colors.amber,
       ),
       CarouselItem(
         title: 'Creative Hub',
         description:
             'Connect with artists and creators\nfrom around the world.',
-        imageUrl: 'https://placehold.co/300x300/png',
+        imageUrl:
+            'https://images.squarespace-cdn.com/content/v1/64370d26da28bc38144ca6e4/1682645870375-GUGT050JBKU3S7JL9G99/5.png',
         backgroundColor: Colors.lightBlue.shade200,
       ),
       CarouselItem(
         title: 'Eco-Friendly Tech',
         description: 'Sustainable gadgets that help\nprotect our planet.',
-        imageUrl: 'https://placehold.co/300x300/png',
+        imageUrl:
+            'https://images.squarespace-cdn.com/content/v1/64370d26da28bc38144ca6e4/1682645870375-GUGT050JBKU3S7JL9G99/5.png',
         backgroundColor: Colors.teal.shade200,
       ),
     ];
@@ -180,7 +187,6 @@ class _FeedPageState extends State<FeedPage> {
           aspectRatio: 16 / 9,
           viewportFraction: 0.9,
         ),
-        // Map over your data to create a list of CarouselItemCard widgets
         items: carouselItems.map((item) {
           return Builder(
             builder: (BuildContext context) {
@@ -192,155 +198,23 @@ class _FeedPageState extends State<FeedPage> {
     );
   }
 
-  Widget _buildCategoryList() {
-    final categories = [
-      {'icon': Icons.lightbulb_outline, 'name': 'Tech'},
-      {'icon': Icons.brush, 'name': 'Art'},
-      {'icon': Icons.music_note, 'name': 'Music'},
-      {'icon': Icons.movie_creation_outlined, 'name': 'Film'},
-      {'icon': Icons.games_outlined, 'name': 'Games'},
-      {'icon': Icons.book_outlined, 'name': 'Books'},
-    ];
-
-    return SizedBox(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Colors.grey[200],
-                  child: Icon(
-                    categories[index]['icon'] as IconData,
-                    color: Colors.black,
-                    size: 30,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(categories[index]['name'] as String),
-              ],
-            ),
-          );
-        },
-      ),
-    );
-  }
-
   Widget _buildFeedCard(int index) {
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
-      padding: const EdgeInsets.all(16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Image/Video placeholder
-          ClipRRect(
-            borderRadius: BorderRadius.circular(15.0),
-            child: Container(
-              height: 200,
-              color: Colors.grey[300],
-              child: Center(
-                child: Icon(Icons.image, size: 50, color: Colors.grey[600]),
-              ),
-            ),
-          ),
-          const SizedBox(height: 16),
-          // Title and Description
-          Text(
-            'Project Feed Title $index',
-            style: Theme.of(context).textTheme.titleMedium,
-          ),
-          const SizedBox(height: 8),
-          const Text(
-            'A short, compelling description of the project goes here to attract backers and supporters.',
-          ),
-          const SizedBox(height: 16),
-          // Pledge Meter
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Pledge Count: 1,234 / 2,000'),
-              const SizedBox(height: 4),
-              LinearProgressIndicator(
-                value: 0.6, // Example progress
-                backgroundColor: Colors.grey[300],
-                valueColor: const AlwaysStoppedAnimation<Color>(Colors.black),
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Divider(),
-          const SizedBox(height: 8),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _buildInteractionButton(
-                icon: Icons.favorite_border,
-                label: '123',
-                onPressed: () {},
-              ),
-              _buildInteractionButton(
-                icon: Icons.comment_outlined,
-                label: '321',
-                onPressed: () {},
-              ),
-              IconButton(
-                icon: const Icon(Icons.share_outlined, color: Colors.black54),
-                onPressed: () {},
-              ),
-            ],
-          ),
-        ],
-      ),
+    final FeedItem feedItem = FeedItem(
+      id: index,
+      imageUrls: [
+        'https://images.squarespace-cdn.com/content/v1/64370d26da28bc38144ca6e4/1682645870375-GUGT050JBKU3S7JL9G99/5.png',
+      ],
+      title: 'Default Title',
+      description: 'Default Description',
+      likeCount: 10 + Random().nextInt((500 + 1) - 10),
+      pledgeCount: 100 + Random().nextInt((999 + 1) - 100),
+      pledgeGoal: 1000,
+      commentCount: 10 + Random().nextInt((500 + 1) - 10),
+      vendorName: 'Arindam Nath',
+      vendorAvatarUrl: '',
+      campaignEndDate: DateTime.now().add(Duration(days: 15)),
+      postedDate: DateTime.now().subtract(Duration(days: 2)),
     );
-  }
-
-  Widget _buildInteractionButton({
-    required IconData icon,
-    required String label,
-    required VoidCallback onPressed,
-  }) {
-    return TextButton.icon(
-      onPressed: onPressed,
-      icon: Icon(icon, color: Colors.black54, size: 20),
-      label: Text(label, style: const TextStyle(color: Colors.black54)),
-      style: TextButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-      ),
-    );
-  }
-}
-
-// Delegate for SliverPersistentHeader to make the category list sticky
-class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  final Widget child;
-
-  _SliverAppBarDelegate({required this.child});
-
-  @override
-  double get minExtent => 100.0;
-  @override
-  double get maxExtent => 100.0;
-
-  @override
-  Widget build(
-    BuildContext context,
-    double shrinkOffset,
-    bool overlapsContent,
-  ) {
-    return child;
-  }
-
-  @override
-  bool shouldRebuild(_SliverAppBarDelegate oldDelegate) {
-    return false;
+    return FeedCard(item: feedItem);
   }
 }

@@ -2,6 +2,8 @@
 import 'package:flock_flutter/welcome.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
@@ -21,16 +23,7 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        title: const Text(
-          'Profile',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
-        ),
-        backgroundColor: Colors.white,
-        elevation: 0,
-        automaticallyImplyLeading: false,
-      ),
+      appBar: AppBar(title: Text('Flock'), automaticallyImplyLeading: false),
       body: ListView(
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
         children: [
@@ -38,31 +31,22 @@ class ProfilePage extends StatelessWidget {
           const SizedBox(height: 30),
           _buildProfileOption(
             context,
-            icon: Icons.location_on_outlined,
-            title: 'Addresses',
+            icon: Ri.user_location_fill,
+            title: 'My Addresses',
           ),
           _buildProfileOption(
             context,
-            icon: Icons.favorite_border,
-            title: 'Pledges',
-          ),
-          _buildProfileOption(
-            context,
-            icon: Icons.history,
+            icon: Ri.shopping_cart_2_line,
             title: 'Order History',
           ),
           _buildProfileOption(
             context,
-            icon: Icons.payment,
+            icon: Ri.secure_payment_fill,
             title: 'Manage Payments',
           ),
           const SizedBox(height: 30),
           ElevatedButton(
             onPressed: () => _logout(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.grey[200],
-              foregroundColor: Colors.black,
-            ),
             child: const Text('Log Out'),
           ),
         ],
@@ -77,39 +61,40 @@ class ProfilePage extends StatelessWidget {
       },
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20.0),
-        child: Row(
+        // Changed Row to a Column for vertical layout
+        child: Column(
+          // Center the items horizontally
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const CircleAvatar(
               radius: 40,
-              backgroundColor: Colors.black,
-              child: Icon(Icons.person, size: 50, color: Colors.white),
+              backgroundColor: Colors.transparent,
+              child: Iconify(Ri.user_6_fill, size: 50, color: Colors.black),
             ),
-            const SizedBox(width: 20),
-            const Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'Jane Doe',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
-                    ),
+            // Changed to vertical spacing
+            const SizedBox(height: 20),
+            // Removed the Expanded widget, no longer needed in a Column
+            const Column(
+              // Center the text content
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Jane Doe',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
                   ),
-                  SizedBox(height: 4),
-                  Text(
-                    '+1 234 567 890',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                  Text(
-                    'jane.doe@example.com',
-                    style: TextStyle(color: Colors.black54),
-                  ),
-                ],
-              ),
+                ),
+                SizedBox(height: 4),
+                Text('+1 234 567 890', style: TextStyle(color: Colors.black54)),
+                Text(
+                  'jane.doe@example.com',
+                  style: TextStyle(color: Colors.black54),
+                ),
+              ],
             ),
-            Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+            const SizedBox(height: 16),
           ],
         ),
       ),
@@ -118,11 +103,11 @@ class ProfilePage extends StatelessWidget {
 
   Widget _buildProfileOption(
     BuildContext context, {
-    required IconData icon,
+    required String icon,
     required String title,
   }) {
     return ListTile(
-      leading: Icon(icon, color: Colors.black),
+      leading: Iconify(icon, color: Colors.black),
       title: Text(title, style: const TextStyle(fontWeight: FontWeight.w500)),
       trailing: const Icon(
         Icons.arrow_forward_ios,

@@ -40,7 +40,21 @@ class _FilterPanelState extends State<FilterPanel> {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Campaigns', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 18),
+          Text(
+            'Filter By',
+            style: TextStyle(
+              fontFamily: 'FlockFont',
+              fontSize: Theme.of(context).textTheme.headlineMedium?.fontSize,
+              color: Colors.black, // If you declared a bold variant
+            ),
+          ),
+          const SizedBox(height: 18),
+          Text('Categories', style: Theme.of(context).textTheme.titleSmall),
+          const SizedBox(height: 10),
+          _buildCategoryList(),
+          const SizedBox(height: 28),
+          Text('Campaigns', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 10),
           Wrap(
             spacing: 8.0,
@@ -64,8 +78,8 @@ class _FilterPanelState extends State<FilterPanel> {
               );
             }).toList(),
           ),
-          const SizedBox(height: 20),
-          Text('Sort by Likes', style: Theme.of(context).textTheme.titleMedium),
+          const SizedBox(height: 28),
+          Text('Sort by Likes', style: Theme.of(context).textTheme.titleSmall),
           ..._likeSortOrders.map((order) {
             return RadioListTile<String>(
               title: Text(order == 'high-low' ? 'High to Low' : 'Low to High'),
@@ -79,7 +93,7 @@ class _FilterPanelState extends State<FilterPanel> {
               activeColor: Colors.black,
             );
           }).toList(),
-          const SizedBox(height: 20),
+          const SizedBox(height: 36),
           Row(
             children: [
               Expanded(
@@ -107,7 +121,49 @@ class _FilterPanelState extends State<FilterPanel> {
               ),
             ],
           ),
+          const SizedBox(height: 18),
         ],
+      ),
+    );
+  }
+
+  Widget _buildCategoryList() {
+    final categories = [
+      {'icon': Icons.lightbulb_outline, 'name': 'Tech'},
+      {'icon': Icons.brush, 'name': 'Art'},
+      {'icon': Icons.music_note, 'name': 'Music'},
+      {'icon': Icons.movie_creation_outlined, 'name': 'Film'},
+      {'icon': Icons.games_outlined, 'name': 'Games'},
+      {'icon': Icons.book_outlined, 'name': 'Books'},
+    ];
+
+    return SizedBox(
+      height: 100,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+        itemCount: categories.length,
+        itemBuilder: (context, index) {
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 30,
+                  backgroundColor: Colors.grey[200],
+                  child: Icon(
+                    categories[index]['icon'] as IconData,
+                    color: Colors.black,
+                    size: 30,
+                  ),
+                ),
+                const SizedBox(height: 8),
+                Text(categories[index]['name'] as String),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

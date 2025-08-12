@@ -1,6 +1,6 @@
 name: flock_flutter
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -14,6 +14,9 @@ dependencies:
   sqflite: ^2.4.2
   path_provider: ^2.1.5
   graphql_flutter: ^5.2.0
+  flutter_svg: ^2.2.0
+  intl: ^0.20.2
+  iconify_flutter: ^0.0.7
 
 dev_dependencies:
   flutter_test:
@@ -24,3 +27,9 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  fonts:
+    - family: FlockFont
+      fonts:
+        - asset: assets/fonts/Galada-Regular.ttf
+  assets:
+    - assets/icons/

@@ -16,8 +16,9 @@ class FlockApp extends StatelessWidget {
         // Define the black and white color scheme
         brightness: Brightness.light,
         primaryColor: Colors.black,
-        scaffoldBackgroundColor: Colors.white,
+        scaffoldBackgroundColor: Color(0xFFF4FDDF),
         fontFamily: 'Poppins',
+        useMaterial3: true,
 
         // Define custom text theme
         textTheme: const TextTheme(
@@ -45,6 +46,21 @@ class FlockApp extends StatelessWidget {
           ),
         ),
 
+        // Define the default AppBarTheme here
+        appBarTheme: AppBarTheme(
+          backgroundColor: const Color(
+            0xFFF4FDDF,
+          ), // Set your desired default color
+          foregroundColor: Colors.black,
+          elevation: 0,
+          iconTheme: const IconThemeData(color: Colors.black),
+          titleTextStyle: TextStyle(
+            fontFamily: 'FlockFont', // Replace with your font family
+            fontSize: 32.0, // Replace with a constant value
+            color: Colors.black,
+          ), // Set default color for icons and text
+        ),
+
         // Define custom input decoration theme for text fields
         inputDecorationTheme: InputDecorationTheme(
           contentPadding: const EdgeInsets.symmetric(
@@ -52,15 +68,15 @@ class FlockApp extends StatelessWidget {
             vertical: 18.0,
           ),
           border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: const BorderSide(color: Colors.black),
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: BorderSide(color: Colors.grey.shade400),
           ),
           focusedBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(12.0),
+            borderRadius: BorderRadius.circular(30.0),
             borderSide: const BorderSide(color: Colors.black, width: 2.0),
           ),
           labelStyle: const TextStyle(color: Colors.black54),
@@ -69,12 +85,30 @@ class FlockApp extends StatelessWidget {
         // Define custom elevated button theme
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
-            ),
+            shape: const StadiumBorder(),
             backgroundColor: Colors.black,
             foregroundColor: Colors.white,
-            padding: const EdgeInsets.symmetric(vertical: 18.0),
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30.0,
+              vertical: 15.0,
+            ),
+            textStyle: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+              fontFamily: 'Poppins',
+            ),
+          ),
+        ),
+
+        outlinedButtonTheme: OutlinedButtonThemeData(
+          style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            backgroundColor: Colors.transparent,
+            foregroundColor: Colors.black,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 30.0,
+              vertical: 15.0,
+            ),
             textStyle: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -93,13 +127,6 @@ class FlockApp extends StatelessWidget {
               fontFamily: 'Poppins',
             ),
           ),
-        ),
-
-        // Define custom app bar theme
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          iconTheme: IconThemeData(color: Colors.black),
         ),
       ),
       // Set the initial route to the new WelcomePage

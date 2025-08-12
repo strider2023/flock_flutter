@@ -64,30 +64,72 @@ class _WelcomePageState extends State<WelcomePage>
                   child: Text(
                     'Flock',
                     textAlign: TextAlign.center,
-                    style: Theme.of(context).textTheme.displayLarge,
+                    style: TextStyle(
+                      fontFamily: 'FlockFont',
+                      fontSize: 96,
+                      color: Colors.black, // If you declared a bold variant
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 20),
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: Text(
+                    'Fund it. Flock it. Flex it.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Color(0xFF283618),
+                      fontSize: Theme.of(
+                        context,
+                      ).textTheme.headlineSmall?.fontSize,
+                    ),
                   ),
                 ),
               ),
               const Spacer(flex: 3),
               // Sign Up and Log In buttons
-              ElevatedButton(
+              OutlinedButton(
+                style: OutlinedButton.styleFrom(
+                  shape: const StadiumBorder(), // This creates the pill shape
+                  side: const BorderSide(
+                    color: Colors.black, // Your desired border color
+                    width: 2, // Your desired border width
+                  ),
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const SignUpPage()),
                   );
                 },
-                child: const Text('Sign Up'),
+                child: Text(
+                  'Sign Up',
+                  style: Theme.of(context).textTheme.headlineSmall,
+                ),
               ),
               const SizedBox(height: 16),
               ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  shape: const StadiumBorder(), // This creates the pill shape
+                ),
                 onPressed: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(builder: (context) => const LoginPage()),
                   );
                 },
-                child: const Text('Log In'),
+                child: Text(
+                  'Log In',
+                  style: TextStyle(
+                    fontSize: Theme.of(
+                      context,
+                    ).textTheme.headlineSmall?.fontSize, // Large text size
+                    color: Colors.white, // Text color matching border
+                  ),
+                ),
               ),
               const SizedBox(height: 20),
             ],
