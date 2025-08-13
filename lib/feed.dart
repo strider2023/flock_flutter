@@ -91,59 +91,42 @@ class _FeedPageState extends State<FeedPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: CustomScrollView(
-        slivers: <Widget>[
-          SliverAppBar(
-            title: Text('Flock'),
-            // Actions remain on the right.
-            actions: [
-              IconButton(
-                icon: const Iconify(Ri.notification_2_fill),
-                onPressed: () {
-                  // TODO: Handle notifications tap
-                },
-              ),
-              IconButton(
-                icon: Iconify(Ri.filter_3_fill),
-                onPressed: _showFilterPanel,
-              ),
-            ],
-            // These properties ensure the app bar hides on scroll.
-            floating: true,
-            pinned: false,
-            snap: true,
-            // Removes the default back button if any.
-            automaticallyImplyLeading: false,
-            // Adding elevation properties for a cleaner, flatter look.
-            elevation: 0,
-            scrolledUnderElevation: 0,
-          ),
-          SliverToBoxAdapter(child: _buildCarousel()),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (BuildContext context, int index) {
-                // Total number of items
-                const int itemCount = 10;
+      appBar: AppBar(
+        // The title of the app.
+        title: const Text('Flock'),
 
-                // Check if the current item is the last one
-                if (index == itemCount - 1) {
-                  // If it's the last item, return a Column with the card and a SizedBox
-                  return Column(
-                    children: [
-                      _buildFeedCard(index),
-                      const SizedBox(
-                        height: 100,
-                      ), // Your desired extra space at the end
-                    ],
-                  );
-                }
-
-                // For all other items, return the card as usual
-                return _buildFeedCard(index);
-              },
-              childCount: 10, // The childCount remains the same
-            ),
+        // Actions for notifications and filtering.
+        actions: [
+          IconButton(
+            icon: Iconify(Ri.notification_2_fill, color: Colors.green.shade800),
+            onPressed: () {
+              // TODO: Handle notifications tap
+            },
           ),
+          IconButton(
+            icon: Iconify(Ri.filter_3_fill, color: Colors.green.shade800),
+            onPressed: _showFilterPanel,
+          ),
+        ],
+
+        // Ensures the app bar does not show a back button.
+        automaticallyImplyLeading: false,
+
+        // Creates a clean, flat look consistent with the original design.
+        elevation: 0,
+        scrolledUnderElevation: 0,
+      ),
+      body: ListView(
+        // The children of the list view are displayed sequentially.
+        children: [
+          // The carousel is now the first item in the list.
+          _buildCarousel(),
+
+          // This generates the list of 10 feed cards using a collection-for loop.
+          ...List.generate(10, (index) => _buildFeedCard(index)),
+
+          // Adds the desired extra space at the very end of the list.
+          const SizedBox(height: 100),
         ],
       ),
     );

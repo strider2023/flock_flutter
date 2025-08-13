@@ -67,7 +67,9 @@ class _WelcomePageState extends State<WelcomePage>
                     style: TextStyle(
                       fontFamily: 'FlockFont',
                       fontSize: 96,
-                      color: Colors.black, // If you declared a bold variant
+                      color: Colors
+                          .green
+                          .shade800, // If you declared a bold variant
                     ),
                   ),
                 ),
@@ -81,7 +83,7 @@ class _WelcomePageState extends State<WelcomePage>
                     'Fund it. Flock it. Flex it.',
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: Color(0xFF283618),
+                      color: Colors.green.shade700,
                       fontSize: Theme.of(
                         context,
                       ).textTheme.headlineSmall?.fontSize,
@@ -92,13 +94,7 @@ class _WelcomePageState extends State<WelcomePage>
               const Spacer(flex: 3),
               // Sign Up and Log In buttons
               OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                  shape: const StadiumBorder(), // This creates the pill shape
-                  side: const BorderSide(
-                    color: Colors.black, // Your desired border color
-                    width: 2, // Your desired border width
-                  ),
-                ),
+                style: OutlinedButton.styleFrom(),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -107,7 +103,11 @@ class _WelcomePageState extends State<WelcomePage>
                 },
                 child: Text(
                   'Sign Up',
-                  style: Theme.of(context).textTheme.headlineSmall,
+                  style: TextStyle(
+                    fontSize: Theme.of(
+                      context,
+                    ).textTheme.headlineSmall?.fontSize,
+                  ),
                 ),
               ),
               const SizedBox(height: 16),
@@ -126,8 +126,7 @@ class _WelcomePageState extends State<WelcomePage>
                   style: TextStyle(
                     fontSize: Theme.of(
                       context,
-                    ).textTheme.headlineSmall?.fontSize, // Large text size
-                    color: Colors.white, // Text color matching border
+                    ).textTheme.headlineSmall?.fontSize,
                   ),
                 ),
               ),

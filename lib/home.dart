@@ -1,10 +1,10 @@
 import 'package:flock_flutter/feed.dart';
+import 'package:flock_flutter/marketplace.dart';
 import 'package:flock_flutter/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
-// --- Home Page ---
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -15,11 +15,10 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
-  // List of pages to be displayed by the bottom nav bar
   static const List<Widget> _widgetOptions = <Widget>[
     FeedPage(),
     PlaceholderWidget(text: 'Search'),
-    PlaceholderWidget(text: 'Shop'),
+    MarketplaceHome(),
     PlaceholderWidget(text: 'My Pledges'),
     ProfilePage(),
   ];
@@ -46,13 +45,12 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // This method remains unchanged.
   Widget _buildBottomNavBar() {
     return Container(
       margin: const EdgeInsets.all(20),
       padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.black,
+        color: Colors.green.shade800,
         borderRadius: BorderRadius.circular(50),
         boxShadow: [
           BoxShadow(
@@ -76,7 +74,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // This method remains unchanged.
   Widget _buildNavItem(String icon, int index) {
     return GestureDetector(
       onTap: () => _onItemTapped(index),
@@ -84,18 +81,18 @@ class _HomePageState extends State<HomePage> {
         radius: 25,
         backgroundColor: _selectedIndex == index
             ? Color(0xFFF4FDDF)
-            : Colors.black,
+            : Colors.green.shade800,
         child: Iconify(
           icon,
-          color: _selectedIndex == index ? Colors.black : Colors.white,
+          color: _selectedIndex == index
+              ? Colors.green.shade800
+              : Color(0xFFF4FDDF),
         ),
       ),
     );
   }
 }
 
-// --- Placeholder for other tabs ---
-// This widget remains unchanged.
 class PlaceholderWidget extends StatelessWidget {
   final String text;
   const PlaceholderWidget({super.key, required this.text});

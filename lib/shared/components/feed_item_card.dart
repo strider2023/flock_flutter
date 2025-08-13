@@ -70,8 +70,7 @@ class _FeedCardState extends State<FeedCard> {
             child: Text(
               'Follow',
               style: TextStyle(
-                color: Colors.black,
-                fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
+                fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
               ),
             ),
           ),
@@ -118,19 +117,19 @@ class _FeedCardState extends State<FeedCard> {
           left: 10,
           child: Chip(
             shape: const StadiumBorder(),
-            avatar: const Icon(
+            avatar: Icon(
               Icons.rocket_launch,
               size: 16,
-              color: Colors.white,
+              color: Color(0xFFF4FDDF),
             ),
             label: Text(
               '$daysPending days to go',
               style: TextStyle(
-                color: Colors.white,
+                color: Color(0xFFF4FDDF),
                 fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
               ),
             ),
-            backgroundColor: Colors.black45,
+            backgroundColor: Colors.green.shade800,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           ),
         ),
@@ -180,8 +179,10 @@ class _FeedCardState extends State<FeedCard> {
                 borderRadius: BorderRadius.circular(10),
                 child: LinearProgressIndicator(
                   value: progress,
-                  backgroundColor: Colors.grey[300],
-                  valueColor: const AlwaysStoppedAnimation<Color>(Colors.black),
+                  backgroundColor: Color(0xFFF4FDDF),
+                  valueColor: AlwaysStoppedAnimation<Color>(
+                    Colors.green.shade800,
+                  ),
                 ),
               ),
             ),

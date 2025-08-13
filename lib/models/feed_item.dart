@@ -29,7 +29,6 @@ class FeedItem {
     required this.postedDate,
   });
 
-  // Updated for new fields
   Map<String, dynamic> toMap() {
     return {
       'id': id,
@@ -48,7 +47,6 @@ class FeedItem {
     };
   }
 
-  // Updated for new fields
   factory FeedItem.fromMap(Map<String, dynamic> map) {
     return FeedItem(
       id: map['id'] is int ? map['id'] : int.parse(map['id']),

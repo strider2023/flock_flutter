@@ -8,7 +8,7 @@ void main() async {
 
   // Check if the user is already logged in
   final prefs = await SharedPreferences.getInstance();
-  final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+  final bool isLoggedIn = prefs.getBool('isLoggedIn') ?? true;
 
   runApp(FlockApp(isLoggedIn: isLoggedIn));
 }

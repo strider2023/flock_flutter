@@ -15,7 +15,7 @@ class FlockApp extends StatelessWidget {
       theme: ThemeData(
         // Define the black and white color scheme
         brightness: Brightness.light,
-        primaryColor: Colors.black,
+        primaryColor: Colors.green.shade800,
         scaffoldBackgroundColor: Color(0xFFF4FDDF),
         fontFamily: 'Poppins',
         useMaterial3: true,
@@ -51,13 +51,13 @@ class FlockApp extends StatelessWidget {
           backgroundColor: const Color(
             0xFFF4FDDF,
           ), // Set your desired default color
-          foregroundColor: Colors.black,
+          foregroundColor: Colors.green.shade800,
           elevation: 0,
-          iconTheme: const IconThemeData(color: Colors.black),
+          iconTheme: IconThemeData(color: Colors.green.shade800),
           titleTextStyle: TextStyle(
             fontFamily: 'FlockFont', // Replace with your font family
             fontSize: 32.0, // Replace with a constant value
-            color: Colors.black,
+            color: Colors.green.shade800,
           ), // Set default color for icons and text
         ),
 
@@ -69,15 +69,15 @@ class FlockApp extends StatelessWidget {
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
-            borderSide: const BorderSide(color: Colors.black),
+            borderSide: const BorderSide(color: Colors.transparent),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
-            borderSide: BorderSide(color: Colors.grey.shade400),
+            borderSide: BorderSide(color: Colors.green.shade800),
           ),
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(30.0),
-            borderSide: const BorderSide(color: Colors.black, width: 2.0),
+            borderSide: BorderSide(color: Colors.green.shade800, width: 2.0),
           ),
           labelStyle: const TextStyle(color: Colors.black54),
         ),
@@ -86,8 +86,8 @@ class FlockApp extends StatelessWidget {
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
-            backgroundColor: Colors.black,
-            foregroundColor: Colors.white,
+            backgroundColor: Colors.green.shade800,
+            foregroundColor: Color(0xFFF4FDDF),
             padding: const EdgeInsets.symmetric(
               horizontal: 30.0,
               vertical: 15.0,
@@ -96,6 +96,7 @@ class FlockApp extends StatelessWidget {
               fontSize: 16,
               fontWeight: FontWeight.bold,
               fontFamily: 'Poppins',
+              color: Color(0xFFF4FDDF),
             ),
           ),
         ),
@@ -104,23 +105,35 @@ class FlockApp extends StatelessWidget {
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             backgroundColor: Colors.transparent,
-            foregroundColor: Colors.black,
+            foregroundColor: Colors.green.shade800,
             padding: const EdgeInsets.symmetric(
               horizontal: 30.0,
               vertical: 15.0,
             ),
-            textStyle: const TextStyle(
+            side: BorderSide(
+              color: Colors.green.shade800, // Your desired border color
+              width: 2, // Your desired border width
+            ),
+            textStyle: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               fontFamily: 'Poppins',
+              color: Colors.green.shade800,
             ),
+          ),
+        ),
+
+        iconButtonTheme: IconButtonThemeData(
+          style: IconButton.styleFrom(
+            foregroundColor:
+                Colors.green.shade800, // Default icon color for all IconButtons
           ),
         ),
 
         // Define custom text button theme
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
-            foregroundColor: Colors.black,
+            foregroundColor: Colors.green.shade800,
             textStyle: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.w500,
