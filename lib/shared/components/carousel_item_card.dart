@@ -26,25 +26,28 @@ class CarouselItemCard extends StatelessWidget {
             flex: 1,
             child: Padding(
               padding: const EdgeInsets.all(16.0),
-              child: Column(
-                // Center the text vertically within the column.
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    item.title,
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black,
+              // FIX: Wrap the Column with a SingleChildScrollView.
+              child: SingleChildScrollView(
+                child: Column(
+                  // Center the text vertically within the column.
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      item.title,
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    item.description,
-                    style: const TextStyle(color: Colors.black87),
-                  ),
-                ],
+                    const SizedBox(height: 8),
+                    Text(
+                      item.description,
+                      style: const TextStyle(color: Colors.black87),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

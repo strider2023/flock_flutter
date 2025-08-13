@@ -1,5 +1,3 @@
-// lib/widgets/brand_card.dart
-
 import 'package:flock_flutter/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
@@ -10,33 +8,33 @@ class BrandCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
-      child: Card(
-        elevation: 2.0,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Image.network(
-                brand.imageUrl,
-                height: 50,
-                width: 50,
-                fit: BoxFit.contain,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                brand.name,
-                textAlign: TextAlign.center,
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-            ],
+    // The root widget is now a Column to match the avatar styling.
+    // The outer Card and SizedBox have been removed for a flatter look.
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        // The Image is replaced with a CircleAvatar for the circular avatar style.
+        CircleAvatar(
+          radius: 42,
+          // A fallback background color for while the image loads.
+          backgroundColor: Colors.green.shade800,
+          // The brand's image is now the background of the avatar.
+          backgroundImage: NetworkImage(brand.imageUrl),
+        ),
+        const SizedBox(height: 8),
+        // The Text widget is placed in a SizedBox to control its width
+        // and prevent long names from breaking the layout.
+        SizedBox(
+          width: 75, // Keeps the text width constrained under the avatar
+          child: Text(
+            brand.name,
+            textAlign: TextAlign.center,
+            maxLines: 2, // Allow for slightly longer brand names
+            overflow: TextOverflow.ellipsis,
+            style: Theme.of(context).textTheme.bodyLarge,
           ),
         ),
-      ),
+      ],
     );
   }
 }

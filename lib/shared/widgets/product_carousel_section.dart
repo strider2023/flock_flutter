@@ -36,7 +36,7 @@ class _ProductCarouselWithIndicatorState extends State<ProductCarouselSection> {
             height: 320,
 
             // A smaller fraction ensures side items are clearly visible.
-            viewportFraction: 0.8,
+            viewportFraction: 0.7,
 
             // This callback updates our state when the page changes.
             onPageChanged: (index, reason) {

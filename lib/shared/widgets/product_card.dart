@@ -5,24 +5,33 @@ import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
-  final double width;
 
   const ProductCard({
     super.key,
-    required this.product,
-    this.width = 320, // Default width for the card
+    required this.product, // Default width for the card
   });
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: width,
-      child: Card(
-        clipBehavior:
-            Clip.antiAlias, // Ensures content respects card's rounded corners
-        elevation: 3.0,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12.0),
+    return // Updated Flutter Component
+    SizedBox(
+      width: MediaQuery.of(context).size.width - 40,
+      // The Card has been replaced with a Container to apply the exact decoration.
+      child: Container(
+        // The margin and decoration are taken from your target style.
+        margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+        clipBehavior: Clip.antiAlias, // Retained from the original Card
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(12),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.shade200,
+              spreadRadius: 0.5,
+              blurRadius: 2,
+              offset: const Offset(0, 3),
+            ),
+          ],
         ),
         child: Stack(
           children: [
@@ -32,34 +41,32 @@ class ProductCard extends StatelessWidget {
                 // Product Image
                 Image.network(
                   product.imageUrl,
-                  height: 120,
+                  height: 180,
                   width: double.infinity,
                   fit: BoxFit.cover,
                   errorBuilder: (context, error, stackTrace) =>
                       const Icon(Icons.error, size: 120),
                 ),
-                // FIX: Wrap the Padding widget with Expanded
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    // The internal padding for the text content is preserved.
+                    padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      // Make the column fill the available space
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      // FIX: Changed from .spaceEvenly to .spaceAround to prevent overflow.
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         // Vendor Name
                         Text(
                           product.vendorName,
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: Colors.grey[600]),
+                          style: Theme.of(context).textTheme.bodySmall,
                           maxLines: 1,
                           overflow: TextOverflow.ellipsis,
                         ),
                         // Item Name
                         Text(
                           product.itemName,
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
+                          style: Theme.of(context).textTheme.titleMedium,
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                         ),
@@ -67,7 +74,7 @@ class ProductCard extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              '\$${product.purchasePrice.toStringAsFixed(2)}',
+                              '₹ ${product.purchasePrice.toStringAsFixed(2)}',
                               style: Theme.of(context).textTheme.titleSmall
                                   ?.copyWith(
                                     color: Colors.green[700],
@@ -77,7 +84,7 @@ class ProductCard extends StatelessWidget {
                             const SizedBox(width: 8),
                             if (product.actualPrice != null)
                               Text(
-                                '\$${product.actualPrice!.toStringAsFixed(2)}',
+                                '₹ ${product.actualPrice!.toStringAsFixed(2)}',
                                 style: Theme.of(context).textTheme.bodySmall
                                     ?.copyWith(
                                       decoration: TextDecoration.lineThrough,
@@ -85,20 +92,6 @@ class ProductCard extends StatelessWidget {
                                     ),
                               ),
                           ],
-                        ),
-                        // Buy Now Button
-                        SizedBox(
-                          width: double.infinity,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              /* Handle Buy Now action */
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.amber[700],
-                              foregroundColor: Colors.black,
-                            ),
-                            child: const Text('Buy Now'),
-                          ),
                         ),
                       ],
                     ),
@@ -117,7 +110,7 @@ class ProductCard extends StatelessWidget {
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.red,
+                    color: Colors.green.shade800,
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Text(
@@ -125,7 +118,7 @@ class ProductCard extends StatelessWidget {
                     style: const TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 10,
+                      fontSize: 12,
                     ),
                   ),
                 ),

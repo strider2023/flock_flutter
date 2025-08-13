@@ -8,6 +8,8 @@ import 'package:flock_flutter/shared/widgets/product_carousel_section.dart';
 import 'package:flutter/material.dart';
 import '../models/product_model.dart';
 import '../models/brand_model.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 
 class MarketplaceHome extends StatefulWidget {
   const MarketplaceHome({super.key});
@@ -53,14 +55,17 @@ class _MarketplaceHomeState extends State<MarketplaceHome> {
       appBar: AppBar(
         title: const Text('Flock'),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.notifications_none),
+            icon: Iconify(Ri.search_2_line, color: Colors.green.shade800),
           ),
           IconButton(
             onPressed: () {},
-            icon: const Icon(Icons.shopping_cart_outlined),
+            icon: Iconify(Ri.notification_3_line, color: Colors.green.shade800),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: Iconify(Ri.shopping_cart_line, color: Colors.green.shade800),
           ),
         ],
         automaticallyImplyLeading: false,
@@ -83,21 +88,20 @@ class _MarketplaceHomeState extends State<MarketplaceHome> {
             return ProductCarouselSection(section: section);
           } else if (section is CategoryProductSection) {
             return MarketplaceSection<ProductModel>(
-              title: "🔥 Trending Now",
+              title: section.title,
               items: section.products,
               listHeight: 320,
               onSeeMore: () => print("See more products"),
               itemBuilder: (product) => ProductCard(product: product),
+              backgroundColor: Colors.black12,
             );
           } else if (section is BrandSection) {
             return MarketplaceSection<BrandModel>(
-              title: "Top Brands",
+              title: section.title,
               items: section.brands,
               listHeight: 120,
               onSeeMore: () => print("See more brands"),
               itemBuilder: (brand) => BrandCard(brand: brand),
-              // The new property in action
-              backgroundColor: Colors.blue.shade50,
             );
           }
           // Fallback for unknown section types

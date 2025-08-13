@@ -2,9 +2,11 @@ import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flock_flutter/models/carousel_item.dart';
 import 'package:flock_flutter/models/feed_item.dart';
+import 'package:flock_flutter/models/header_action.dart';
 import 'package:flock_flutter/shared/components/filter_panel.dart';
 import 'package:flock_flutter/shared/components/carousel_item_card.dart';
 import 'package:flock_flutter/shared/components/feed_item_card.dart';
+import 'package:flock_flutter/shared/widgets/home_header.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
@@ -90,31 +92,25 @@ class _FeedPageState extends State<FeedPage> {
 
   @override
   Widget build(BuildContext context) {
+    final List<HeaderAction> headerActions = [
+      HeaderAction(
+        icon: Ri.notification_3_line,
+        actionName: 'notifications', // Unique name for this action
+      ),
+      HeaderAction(
+        icon: Ri.filter_3_fill,
+        actionName: 'filter', // Unique name for this action
+      ),
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        // The title of the app.
-        title: const Text('Flock'),
-
-        // Actions for notifications and filtering.
-        actions: [
-          IconButton(
-            icon: Iconify(Ri.notification_2_fill, color: Colors.green.shade800),
-            onPressed: () {
-              // TODO: Handle notifications tap
-            },
-          ),
-          IconButton(
-            icon: Iconify(Ri.filter_3_fill, color: Colors.green.shade800),
-            onPressed: _showFilterPanel,
-          ),
-        ],
-
-        // Ensures the app bar does not show a back button.
-        automaticallyImplyLeading: false,
-
-        // Creates a clean, flat look consistent with the original design.
-        elevation: 0,
-        scrolledUnderElevation: 0,
+      appBar: HomeHeader(
+        actions: headerActions,
+        onActionPressed: (actionName) {
+          if (actionName == 'filter') {
+            _showFilterPanel();
+          }
+        },
       ),
       body: ListView(
         // The children of the list view are displayed sequentially.

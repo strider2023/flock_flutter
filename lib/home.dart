@@ -100,7 +100,7 @@ class PlaceholderWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(text)),
+      appBar: AppBar(title: Text(text), automaticallyImplyLeading: false),
       body: Center(
         child: Text(text, style: Theme.of(context).textTheme.headlineSmall),
       ),
