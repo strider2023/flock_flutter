@@ -1,14 +1,13 @@
 import 'dart:math';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flock_flutter/models/carousel_item.dart';
-import 'package:flock_flutter/models/feed_item.dart';
-import 'package:flock_flutter/models/header_action.dart';
-import 'package:flock_flutter/shared/components/filter_panel.dart';
-import 'package:flock_flutter/shared/components/carousel_item_card.dart';
-import 'package:flock_flutter/shared/components/feed_item_card.dart';
-import 'package:flock_flutter/shared/widgets/home_header.dart';
+import 'package:flock_flutter/modules/feed/models/carousel_item.dart';
+import 'package:flock_flutter/modules/feed/models/feed_item.dart';
+import 'package:flock_flutter/common/models/header_action.dart';
+import 'package:flock_flutter/modules/feed/widgets/filter_panel.dart';
+import 'package:flock_flutter/modules/feed/widgets/carousel_item_card.dart';
+import 'package:flock_flutter/modules/feed/widgets/feed_item_card.dart';
+import 'package:flock_flutter/common/widgets/home_header.dart';
 import 'package:flutter/material.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
 class FeedPage extends StatefulWidget {
@@ -19,56 +18,12 @@ class FeedPage extends StatefulWidget {
 }
 
 class _FeedPageState extends State<FeedPage> {
-  List<FeedItem> _allFeedItems = [];
-  List<FeedItem> _filteredFeedItems = [];
-
   String? _activeCampaignFilter;
   String? _activeLikeSortOrder;
-  bool _isLoading = true;
 
   @override
   void initState() {
     super.initState();
-    // _fetchAndSetFeed();
-  }
-
-  // Future<void> _fetchAndSetFeed() async {
-  //   setState(() => _isLoading = true);
-  //   final items = await _apiService.getFeedData(context);
-  //   setState(() {
-  //     _allFeedItems = items;
-  //     _applyFilters();
-  //     _isLoading = false;
-  //   });
-  // }
-
-  void _applyFilters() {
-    // List<FeedItem> items = List.from(_allFeedItems);
-
-    // // Campaign Filtering (client-side example)
-    // if (_activeCampaignFilter != null) {
-    //   if (_activeCampaignFilter == 'New Launches') {
-    //     items.retainWhere((item) => DateTime.now().difference(item.launchDate).inDays <= 7);
-    //   } else if (_activeCampaignFilter == 'Closing Soon') {
-    //     items.retainWhere((item) => (item.pledgeGoal - item.pledgeCount) < 100 && item.pledgeCount < item.pledgeGoal);
-    //   } else if (_activeCampaignFilter == 'Expiring Soon') {
-    //      // This is just an example, you'd have an expiry date in a real model
-    //     items.retainWhere((item) => item.id % 3 == 0);
-    //   }
-    // }
-
-    // // Like Sorting
-    // if (_activeLikeSortOrder != null) {
-    //   if (_activeLikeSortOrder == 'high-low') {
-    //     items.sort((a, b) => b.likeCount.compareTo(a.likeCount));
-    //   } else if (_activeLikeSortOrder == 'low-high') {
-    //     items.sort((a, b) => a.likeCount.compareTo(b.likeCount));
-    //   }
-    // }
-
-    // setState(() {
-    //   _filteredFeedItems = items;
-    // });
   }
 
   void _showFilterPanel() async {

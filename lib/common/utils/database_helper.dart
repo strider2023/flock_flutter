@@ -1,4 +1,4 @@
-import 'package:flock_flutter/models/feed_item.dart';
+import 'package:flock_flutter/modules/feed/models/feed_item.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'dart:io';

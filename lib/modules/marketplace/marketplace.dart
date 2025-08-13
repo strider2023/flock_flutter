@@ -1,13 +1,13 @@
 // lib/screens/home_screen.dart
 
-import 'package:flock_flutter/models/marketplace_feed_model.dart';
-import 'package:flock_flutter/shared/widgets/brand_card.dart';
-import 'package:flock_flutter/shared/widgets/marketplace_section.dart';
-import 'package:flock_flutter/shared/widgets/product_card.dart';
-import 'package:flock_flutter/shared/widgets/product_carousel_section.dart';
+import 'package:flock_flutter/modules/marketplace/models/marketplace_feed_model.dart';
+import 'package:flock_flutter/modules/marketplace/widgets/brand_card.dart';
+import 'package:flock_flutter/modules/marketplace/widgets/marketplace_section.dart';
+import 'package:flock_flutter/modules/marketplace/widgets/product_card.dart';
+import 'package:flock_flutter/modules/marketplace/widgets/product_carousel_section.dart';
 import 'package:flutter/material.dart';
-import '../models/product_model.dart';
-import '../models/brand_model.dart';
+import 'models/product_model.dart';
+import 'models/brand_model.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 

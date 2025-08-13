@@ -1,6 +1,6 @@
-import 'package:flock_flutter/feed.dart';
-import 'package:flock_flutter/marketplace.dart';
-import 'package:flock_flutter/profile.dart';
+import 'package:flock_flutter/modules/feed/feed.dart';
+import 'package:flock_flutter/modules/marketplace/marketplace.dart';
+import 'package:flock_flutter/modules/profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
@@ -19,7 +19,7 @@ class _HomePageState extends State<HomePage> {
     FeedPage(),
     PlaceholderWidget(text: 'Search'),
     MarketplaceHome(),
-    PlaceholderWidget(text: 'My Pledges'),
+    PlaceholderWidget(text: 'Liked'),
     ProfilePage(),
   ];
 
@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage> {
           _buildNavItem(Ri.home_7_fill, 0),
           _buildNavItem(Ri.search_2_fill, 1),
           _buildNavItem(Ri.shopping_bag_2_fill, 2),
-          _buildNavItem(Ri.hand_coin_fill, 3),
+          _buildNavItem(Ri.heart_3_fill, 3),
           _buildNavItem(Ri.menu_fill, 4),
         ],
       ),

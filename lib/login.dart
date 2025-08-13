@@ -1,5 +1,5 @@
 import 'package:flock_flutter/home.dart';
-import 'package:flock_flutter/shared/widgets/social_login_button.dart';
+import 'package:flock_flutter/common/widgets/social_login_button.dart';
 import 'package:flutter/material.dart';
 
 // --- Login Page ---

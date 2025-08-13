@@ -1,11 +1,9 @@
-import 'package:flock_flutter/models/feed_item.dart';
+import 'package:flock_flutter/modules/feed/models/feed_item.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
-import 'package:iconify_flutter/icons/icon_park_outline.dart';
-import 'package:iconify_flutter/icons/uil.dart';
-import 'package:iconify_flutter/icons/majesticons.dart';
+import 'package:iconify_flutter/icons/ri.dart';
 
 class FeedCard extends StatefulWidget {
   final FeedItem item;
@@ -151,16 +149,16 @@ class _FeedCardState extends State<FeedCard> {
         Row(
           children: [
             _buildInteractionButton(
-              icon: IconParkOutline.like,
+              icon: Ri.hand_heart_line,
               label: '${widget.item.likeCount}',
             ),
             const SizedBox(width: 16),
             _buildInteractionButton(
-              icon: Uil.comment_dots,
+              icon: Ri.chat_1_line,
               label: '${widget.item.commentCount}',
             ),
             const SizedBox(width: 16),
-            _buildInteractionButton(icon: Majesticons.share, label: ''),
+            _buildInteractionButton(icon: Ri.share_forward_line, label: ''),
           ],
         ),
         // Right side: Pledge progress pill

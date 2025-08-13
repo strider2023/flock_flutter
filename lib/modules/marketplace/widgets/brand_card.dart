@@ -1,4 +1,4 @@
-import 'package:flock_flutter/models/brand_model.dart';
+import 'package:flock_flutter/modules/marketplace/models/brand_model.dart';
 import 'package:flutter/material.dart';
 
 class BrandCard extends StatelessWidget {

@@ -1,6 +1,6 @@
 // lib/widgets/product_card.dart
 
-import 'package:flock_flutter/models/product_model.dart';
+import 'package:flock_flutter/modules/marketplace/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {

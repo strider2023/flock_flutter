@@ -1,7 +1,7 @@
 // lib/widgets/product_carousel_section.dart
 
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flock_flutter/models/marketplace_feed_model.dart';
+import 'package:flock_flutter/modules/marketplace/models/marketplace_feed_model.dart';
 import 'package:flutter/material.dart';
 import 'product_card.dart';
 

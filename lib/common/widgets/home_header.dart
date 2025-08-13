@@ -1,5 +1,5 @@
 // lib/widgets/home_header.dart
-import 'package:flock_flutter/models/header_action.dart';
+import 'package:flock_flutter/common/models/header_action.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 
