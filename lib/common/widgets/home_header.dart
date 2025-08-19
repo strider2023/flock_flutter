@@ -17,12 +17,14 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Color? iconColor = Theme.of(context).appBarTheme.iconTheme?.color;
+
     return AppBar(
       title: Text(title),
       // Dynamically build the actions from the list provided.
       actions: actions.map((action) {
         return IconButton(
-          icon: Iconify(action.icon),
+          icon: Iconify(action.icon, color: iconColor),
           onPressed: () {
             // Emit the action name when the icon is pressed.
             onActionPressed(action.actionName);

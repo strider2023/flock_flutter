@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../common/widgets/home_header.dart';
 import '../viewmodels/favorites_viewmodel.dart';
 import '../widgets/item_grid_card.dart';
 
@@ -14,10 +15,7 @@ class FavoritesView extends StatelessWidget {
     final viewModel = context.watch<FavoritesViewModel>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('My Library'),
-        automaticallyImplyLeading: false,
-      ),
+      appBar: HomeHeader(actions: [], onActionPressed: (actionName) {}),
       body: Column(
         children: [
           _buildPillTabBar(context, viewModel),

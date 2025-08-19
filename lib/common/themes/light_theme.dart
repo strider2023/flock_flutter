@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 
 // Define theme colors
-const Color primaryYellow = Color(0xFFF5DF4D);
+const Color primaryYellow = Color(0xFFFFC549);
+const Color secondaryTomato = Color(0xffef6a3f);
 const Color lightText = Colors.black;
-const Color lightBackground = Colors.white;
+const Color lightBackground = Color(0xFFfbfbfb);
 
 final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
@@ -30,14 +31,9 @@ final ThemeData lightTheme = ThemeData(
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30.0),
-      borderSide: const BorderSide(color: lightText),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30.0),
-      borderSide: const BorderSide(color: lightText, width: 2.0),
-    ),
+    fillColor: Colors.grey.shade800,
+    enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+    focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
     labelStyle: const TextStyle(color: Colors.black54),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -73,5 +69,11 @@ final ThemeData lightTheme = ThemeData(
         fontFamily: 'Poppins',
       ),
     ),
+  ),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color:
+        primaryYellow, // Overrides the colorScheme.primary for circular indicators
+    circularTrackColor:
+        primaryYellow, // Sets the track color for circular indicators
   ),
 );

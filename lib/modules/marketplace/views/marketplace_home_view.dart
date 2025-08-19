@@ -3,9 +3,10 @@
 import 'package:flock_flutter/modules/marketplace/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
+import '../../../common/models/header_action.dart';
+import '../../../common/widgets/home_header.dart';
 import '../models/marketplace_feed_model.dart';
 import '../models/product_model.dart';
 import '../viewmodels/marketplace_viewmodel.dart';
@@ -15,7 +16,13 @@ import '../widgets/product_card.dart';
 import '../widgets/product_carousel_section.dart';
 
 class MarketplaceHomeView extends StatelessWidget {
-  const MarketplaceHomeView({super.key});
+  MarketplaceHomeView({super.key});
+
+  final List<HeaderAction> headerActions = [
+    HeaderAction(icon: Ri.search_2_line, actionName: 'search'),
+    HeaderAction(icon: Ri.notification_3_line, actionName: 'notifications'),
+    HeaderAction(icon: Ri.shopping_cart_line, actionName: 'cart'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -23,23 +30,9 @@ class MarketplaceHomeView extends StatelessWidget {
     final viewModel = context.watch<MarketplaceViewModel>();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flock'),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Iconify(Ri.search_2_line, color: Colors.green.shade800),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Iconify(Ri.notification_3_line, color: Colors.green.shade800),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: Iconify(Ri.shopping_cart_line, color: Colors.green.shade800),
-          ),
-        ],
-        automaticallyImplyLeading: false,
+      appBar: HomeHeader(
+        actions: headerActions,
+        onActionPressed: (actionName) {},
       ),
       body: _buildBody(context, viewModel),
     );
@@ -72,7 +65,6 @@ class MarketplaceHomeView extends StatelessWidget {
             listHeight: 320,
             onSeeMore: () => debugPrint("See more products"),
             itemBuilder: (product) => ProductCard(product: product),
-            backgroundColor: Colors.black12,
           );
         } else if (section is BrandSection) {
           return MarketplaceSection<BrandModel>(

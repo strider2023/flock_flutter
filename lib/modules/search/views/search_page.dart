@@ -78,8 +78,6 @@ class _SearchPageState extends State<SearchPage> {
                         borderRadius: BorderRadius.circular(12.0),
                         borderSide: BorderSide.none,
                       ),
-                      filled: true,
-                      fillColor: Colors.grey[200],
                       contentPadding: EdgeInsets.zero,
                     ),
                     onSubmitted: (query) {

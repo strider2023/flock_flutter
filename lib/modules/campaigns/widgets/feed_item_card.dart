@@ -1,9 +1,10 @@
-import 'package:flock_flutter/modules/campaigns/models/campaign_item.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+
+import '../models/campaign_item.dart';
 
 class FeedCard extends StatefulWidget {
   final FeedItem item;
@@ -16,34 +17,33 @@ class FeedCard extends StatefulWidget {
 class _FeedCardState extends State<FeedCard> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    // ✨ CHANGED: The root widget is now a Card.
+    return Card(
+      // The margin is applied directly to the Card.
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 0.5,
-            blurRadius: 2,
-            offset: const Offset(0, 3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          _buildHeader(),
-          const SizedBox(height: 12),
-          _buildImageCarousel(),
-          const SizedBox(height: 12),
-          _buildInteractionBar(),
-          const SizedBox(height: 12),
-          _buildContentSection(),
-          const SizedBox(height: 8),
-          _buildDateStamp(),
-        ],
+      // The shape property is used to maintain the border radius.
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      // Ensures content inside the card respects the rounded corners.
+      clipBehavior: Clip.antiAlias,
+      // Elevation is set to 0 to remove any shadow.
+      elevation: 0,
+      // The Card's child is the content that was previously in the Container.
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _buildHeader(),
+            const SizedBox(height: 12),
+            _buildImageCarousel(),
+            const SizedBox(height: 12),
+            _buildInteractionBar(),
+            const SizedBox(height: 12),
+            _buildContentSection(),
+            const SizedBox(height: 8),
+            _buildDateStamp(),
+          ],
+        ),
       ),
     );
   }
@@ -115,19 +115,15 @@ class _FeedCardState extends State<FeedCard> {
           left: 10,
           child: Chip(
             shape: const StadiumBorder(),
-            avatar: Icon(
-              Icons.rocket_launch,
-              size: 16,
-              color: Color(0xFFF4FDDF),
-            ),
+            avatar: Icon(Icons.rocket_launch, size: 16, color: Colors.black),
             label: Text(
               '$daysPending days to go',
               style: TextStyle(
-                color: Color(0xFFF4FDDF),
+                color: Colors.black,
                 fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
               ),
             ),
-            backgroundColor: Colors.green.shade800,
+            backgroundColor: Theme.of(context).primaryColor,
             padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           ),
         ),
@@ -175,13 +171,7 @@ class _FeedCardState extends State<FeedCard> {
               height: 8,
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(10),
-                child: LinearProgressIndicator(
-                  value: progress,
-                  backgroundColor: Color(0xFFF4FDDF),
-                  valueColor: AlwaysStoppedAnimation<Color>(
-                    Colors.green.shade800,
-                  ),
-                ),
+                child: LinearProgressIndicator(value: progress),
               ),
             ),
           ],
@@ -223,13 +213,7 @@ class _FeedCardState extends State<FeedCard> {
         Iconify(icon, color: Colors.grey),
         if (label.isNotEmpty) ...[
           const SizedBox(width: 4),
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.black54,
-              fontWeight: FontWeight.w500,
-            ),
-          ),
+          Text(label, style: const TextStyle(fontWeight: FontWeight.w500)),
         ],
       ],
     );

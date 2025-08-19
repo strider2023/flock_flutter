@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 // Define theme colors
-const Color primaryYellow = Color(0xFFF5DF4D);
+const Color primaryYellow = Color(0xFFFFC549);
 const Color darkText = Colors.white;
 const Color lightText = Colors.black; // For text on yellow buttons
-const Color darkBackground = Color(0xFF121212);
+const Color darkBackground = Color(0xFF232122);
 
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
@@ -23,7 +23,7 @@ final ThemeData darkTheme = ThemeData(
     backgroundColor: darkBackground,
     foregroundColor: darkText,
     elevation: 0,
-    iconTheme: IconThemeData(color: darkText),
+    iconTheme: IconThemeData(color: primaryYellow),
     titleTextStyle: TextStyle(
       fontFamily: 'FlockFont',
       fontSize: 32.0,
@@ -31,14 +31,9 @@ final ThemeData darkTheme = ThemeData(
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(
-    enabledBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30.0),
-      borderSide: const BorderSide(color: darkText),
-    ),
-    focusedBorder: OutlineInputBorder(
-      borderRadius: BorderRadius.circular(30.0),
-      borderSide: const BorderSide(color: primaryYellow, width: 2.0),
-    ),
+    fillColor: Colors.grey.shade800,
+    enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+    focusedBorder: OutlineInputBorder(borderSide: BorderSide.none),
     labelStyle: const TextStyle(color: Colors.white70),
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
@@ -74,5 +69,17 @@ final ThemeData darkTheme = ThemeData(
         fontFamily: 'Poppins',
       ),
     ),
+  ),
+  navigationBarTheme: NavigationBarThemeData(
+    indicatorColor: primaryYellow,
+    iconTheme: WidgetStateProperty.all(
+      const IconThemeData(color: Colors.white),
+    ),
+  ),
+  progressIndicatorTheme: const ProgressIndicatorThemeData(
+    color:
+        primaryYellow, // Overrides the colorScheme.primary for circular indicators
+    circularTrackColor:
+        primaryYellow, // Sets the track color for circular indicators
   ),
 );

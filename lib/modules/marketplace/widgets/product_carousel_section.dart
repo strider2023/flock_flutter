@@ -73,7 +73,7 @@ class _ProductCarouselWithIndicatorState extends State<ProductCarouselSection> {
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   // The color changes based on the current page index.
-                  color: (Colors.black).withOpacity(
+                  color: (Theme.of(context).primaryColor).withOpacity(
                     _current == entry.key ? 0.9 : 0.4,
                   ),
                 ),

@@ -27,7 +27,7 @@ class _LoginViewState extends State<LoginView>
   void initState() {
     super.initState();
     _controller = AnimationController(
-      duration: const Duration(milliseconds: 900),
+      duration: const Duration(milliseconds: 1200),
       vsync: this,
     );
 
@@ -106,15 +106,18 @@ class _LoginViewState extends State<LoginView>
                 Text(
                   'Flock',
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontFamily: 'FlockFont', fontSize: 72),
+                  style: TextStyle(
+                    fontFamily: 'FlockFont',
+                    fontSize: 72,
+                    color: Theme.of(context).primaryColor,
+                  ),
                 ),
                 Text(
                   'Fund it. Flock it. Flex it.',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    fontSize: Theme.of(
-                      context,
-                    ).textTheme.headlineSmall?.fontSize,
+                    fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
+                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],
@@ -173,7 +176,7 @@ class _LoginViewState extends State<LoginView>
             child: const Text('Forgot Password?'),
           ),
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 8),
 
         // --- Login Button ---
         if (viewModel.isLoading)
@@ -203,15 +206,12 @@ class _LoginViewState extends State<LoginView>
         // ✨ ADDED: Social Login Divider & Buttons
         const Row(
           children: <Widget>[
-            Expanded(child: Divider(color: Colors.black26)),
+            Expanded(child: Divider()),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 16.0),
-              child: Text(
-                'Or continue with',
-                style: TextStyle(color: Colors.black54),
-              ),
+              child: Text('Or continue with'),
             ),
-            Expanded(child: Divider(color: Colors.black26)),
+            Expanded(child: Divider()),
           ],
         ),
         const SizedBox(height: 24),
@@ -223,7 +223,7 @@ class _LoginViewState extends State<LoginView>
             SocialLoginButton(type: 'Apple', onPressed: () {}),
           ],
         ),
-        const SizedBox(height: 24),
+        const SizedBox(height: 12),
 
         Row(
           mainAxisAlignment: MainAxisAlignment.center,

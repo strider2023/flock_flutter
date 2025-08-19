@@ -1,38 +1,26 @@
-// lib/widgets/product_card.dart
-
 import 'package:flock_flutter/modules/marketplace/models/product_model.dart';
 import 'package:flutter/material.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;
 
-  const ProductCard({
-    super.key,
-    required this.product, // Default width for the card
-  });
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    return // Updated Flutter Component
-    SizedBox(
+    // ✨ CHANGED: The root Container has been replaced with a Card.
+    return SizedBox(
       width: MediaQuery.of(context).size.width - 40,
-      // The Card has been replaced with a Container to apply the exact decoration.
-      child: Container(
-        // The margin and decoration are taken from your target style.
+      child: Card(
+        // The margin is applied directly to the Card.
         margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-        clipBehavior: Clip.antiAlias, // Retained from the original Card
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(12),
-          boxShadow: [
-            BoxShadow(
-              color: Colors.grey.shade200,
-              spreadRadius: 0.5,
-              blurRadius: 2,
-              offset: const Offset(0, 3),
-            ),
-          ],
-        ),
+        // The shape property is used to maintain the border radius.
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+        // Ensures content inside the card respects the rounded corners.
+        clipBehavior: Clip.antiAlias,
+        // Elevation is set to 0 to remove any shadow as requested.
+        elevation: 0,
+        // The Card's child is the Stack that was previously inside the Container.
         child: Stack(
           children: [
             Column(
@@ -49,11 +37,9 @@ class ProductCard extends StatelessWidget {
                 ),
                 Expanded(
                   child: Padding(
-                    // The internal padding for the text content is preserved.
                     padding: const EdgeInsets.only(left: 10, right: 10),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      // FIX: Changed from .spaceEvenly to .spaceAround to prevent overflow.
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         // Vendor Name

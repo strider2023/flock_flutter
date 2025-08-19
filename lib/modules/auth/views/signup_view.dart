@@ -54,14 +54,13 @@ class _SignUpViewState extends State<SignUpView> {
         Text(
           'Create Account',
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            fontFamily: 'FlockFont',
-            color: Colors.black,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineMedium?.copyWith(fontFamily: 'FlockFont'),
         ),
         const SizedBox(height: 8),
         Text(
-          'Fill in the details to get started.',
+          'Fill in the details to get flocking.',
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyMedium,
         ),

@@ -17,7 +17,7 @@ class BrandCard extends StatelessWidget {
         CircleAvatar(
           radius: 42,
           // A fallback background color for while the image loads.
-          backgroundColor: Colors.green.shade800,
+          backgroundColor: Theme.of(context).primaryColor,
           // The brand's image is now the background of the avatar.
           backgroundImage: NetworkImage(brand.imageUrl),
         ),

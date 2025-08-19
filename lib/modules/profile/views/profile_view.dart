@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+import '../../../common/models/header_action.dart';
+import '../../../common/widgets/home_header.dart';
 import '../models/user_model.dart';
 import '../viewmodels/profile_viewmodel.dart';
 
@@ -15,17 +17,18 @@ class ProfileView extends StatelessWidget {
     // Use context.watch to listen for state changes for building UI
     final viewModel = context.watch<ProfileViewModel>();
 
+    final List<HeaderAction> headerActions = [
+      HeaderAction(icon: Ri.logout_circle_line, actionName: 'logout'),
+    ];
+
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Flock'),
-        actions: [
-          IconButton(
-            icon: Iconify(Ri.logout_circle_line, color: Colors.green.shade800),
-            // Use context.read for one-time actions like button presses
-            onPressed: () => context.read<ProfileViewModel>().logout(),
-          ),
-        ],
-        automaticallyImplyLeading: false,
+      appBar: HomeHeader(
+        actions: headerActions,
+        onActionPressed: (actionName) {
+          if (actionName == 'logout') {
+            context.read<ProfileViewModel>().logout();
+          }
+        },
       ),
       body: viewModel.isLoading
           ? const Center(child: CircularProgressIndicator())
@@ -81,10 +84,10 @@ class ProfileView extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const CircleAvatar(
+            CircleAvatar(
               radius: 40,
-              backgroundColor: Colors.transparent,
-              child: Iconify(Ri.user_6_fill, size: 50, color: Colors.black),
+              backgroundColor: Theme.of(context).primaryColor,
+              child: Iconify(Ri.user_6_fill, size: 50),
             ),
             const SizedBox(height: 20),
             Column(
@@ -92,14 +95,13 @@ class ProfileView extends StatelessWidget {
               children: [
                 Text(
                   user.name,
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontFamily: 'FlockFont',
-                    color: Colors.black,
-                  ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.headlineMedium?.copyWith(fontFamily: 'FlockFont'),
                 ),
                 const SizedBox(height: 4),
-                Text(user.phone, style: const TextStyle(color: Colors.black54)),
-                Text(user.email, style: const TextStyle(color: Colors.black54)),
+                Text(user.phone, style: const TextStyle()),
+                Text(user.email, style: const TextStyle()),
               ],
             ),
             const SizedBox(height: 16),
@@ -114,20 +116,15 @@ class ProfileView extends StatelessWidget {
     required String icon,
     required String title,
   }) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final Color themeColor = isDarkMode
+        ? Theme.of(context).primaryColor
+        : Color(0xFF232122);
+
     return ListTile(
-      leading: Iconify(icon, color: Colors.green.shade800),
-      title: Text(
-        title,
-        style: TextStyle(
-          fontWeight: FontWeight.w500,
-          color: Colors.green.shade800,
-        ),
-      ),
-      trailing: const Icon(
-        Icons.arrow_forward_ios,
-        size: 16,
-        color: Colors.black54,
-      ),
+      leading: Iconify(icon, color: themeColor),
+      title: Text(title, style: TextStyle(fontWeight: FontWeight.w500)),
+      trailing: const Icon(Icons.arrow_forward_ios, size: 16),
       onTap: () {
         /* TODO: Navigate */
       },
