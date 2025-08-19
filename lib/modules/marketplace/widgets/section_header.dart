@@ -27,11 +27,7 @@ class SectionHeader extends StatelessWidget {
           ),
           IconButton(
             onPressed: onSeeMore,
-            icon: Icon(
-              Icons.arrow_forward_ios,
-              size: 18,
-              color: Colors.grey[700],
-            ),
+            icon: Icon(Icons.arrow_forward_ios, size: 18),
           ),
         ],
       ),

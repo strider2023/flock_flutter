@@ -2,28 +2,23 @@ import 'package:flock_flutter/modules/campaigns/views/campaign_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+import 'package:provider/provider.dart';
 
+import 'common/viewmodels/navigation_viewmodel.dart';
 import 'modules/favorites/views/favorites_view.dart';
 import 'modules/marketplace/views/marketplace_home_view.dart';
 import 'modules/profile/views/profile_view.dart';
 import 'modules/search/views/search_page.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  int _selectedIndex = 0;
-
   static final List<Widget> _widgetOptions = <Widget>[
-    const CampaignHomeView(),
-    const SearchPage(),
+    CampaignHomeView(),
+    SearchPage(),
     MarketplaceHomeView(),
-    const FavoritesView(),
-    const ProfileView(),
+    FavoritesView(),
+    ProfileView(),
   ];
 
   List<NavigationDestination> _getNavDestinations(BuildContext context) {
@@ -31,7 +26,7 @@ class _HomePageState extends State<HomePage> {
     final Color unselectedColor = isDarkMode ? Colors.white : Color(0xFF232122);
     final Color selectedColor = isDarkMode
         ? Color(0xFF232122)
-        : Color(0xFF232122);
+        : Color(0xFFfbfbfb);
 
     return [
       NavigationDestination(
@@ -62,21 +57,17 @@ class _HomePageState extends State<HomePage> {
     ];
   }
 
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
+    final navViewModel = context.watch<NavigationViewModel>();
+
     return Scaffold(
-      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      body: Center(child: _widgetOptions.elementAt(navViewModel.selectedIndex)),
       bottomNavigationBar: NavigationBar(
         destinations: _getNavDestinations(context),
-        selectedIndex: _selectedIndex,
-        onDestinationSelected: _onItemTapped,
-        indicatorColor: Theme.of(context).primaryColor,
+        selectedIndex: navViewModel.selectedIndex,
+        onDestinationSelected: (index) =>
+            context.read<NavigationViewModel>().changeTab(index),
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
       ),
     );

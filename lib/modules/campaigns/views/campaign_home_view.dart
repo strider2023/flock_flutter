@@ -6,7 +6,9 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
 import '../../../common/models/header_action.dart';
+import '../../../common/widgets/app_carousel.dart';
 import '../../../common/widgets/home_header.dart';
+import '../models/carousel_item.dart';
 import '../viewmodels/campaign_viewmodel.dart';
 import '../widgets/carousel_item_card.dart';
 import '../widgets/feed_item_card.dart';
@@ -65,8 +67,7 @@ class CampaignHomeView extends StatelessWidget {
     return ListView(
       children: [
         _buildCarousel(viewModel),
-        ...viewModel.feedItems.map((item) => FeedCard(item: item)).toList(),
-        const SizedBox(height: 100),
+        ...viewModel.feedItems.map((item) => FeedCard(item: item)),
       ],
     );
   }
@@ -74,10 +75,9 @@ class CampaignHomeView extends StatelessWidget {
   Widget _buildCarousel(FeedViewModel viewModel) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 20.0),
-      child: CarouselSlider.builder(
-        itemCount: viewModel.carouselItems.length,
-        itemBuilder: (context, index, realIndex) {
-          final item = viewModel.carouselItems[index];
+      child: AppCarousel<CarouselItem>(
+        items: viewModel.carouselItems,
+        itemBuilder: (context, item) {
           return CarouselItemCard(item: item);
         },
         options: CarouselOptions(

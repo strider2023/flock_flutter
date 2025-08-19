@@ -46,7 +46,6 @@ class _FilterPanelState extends State<FilterPanel> {
             style: TextStyle(
               fontFamily: 'FlockFont',
               fontSize: Theme.of(context).textTheme.headlineMedium?.fontSize,
-              color: Colors.black, // If you declared a bold variant
             ),
           ),
           const SizedBox(height: 18),
@@ -73,7 +72,7 @@ class _FilterPanelState extends State<FilterPanel> {
                       ? Colors.white
                       : Colors.black,
                 ),
-                backgroundColor: Colors.grey[200],
+                backgroundColor: Theme.of(context).primaryColor,
                 showCheckmark: false,
               );
             }).toList(),
@@ -151,10 +150,10 @@ class _FilterPanelState extends State<FilterPanel> {
               children: [
                 CircleAvatar(
                   radius: 30,
-                  backgroundColor: Colors.grey[200],
+                  backgroundColor: Theme.of(context).primaryColor,
                   child: Icon(
                     categories[index]['icon'] as IconData,
-                    color: Colors.black,
+                    color: Color(0xFF232122),
                     size: 30,
                   ),
                 ),

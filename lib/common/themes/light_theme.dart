@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Define theme colors
 const Color primaryYellow = Color(0xFFFFC549);
@@ -10,14 +11,33 @@ final ThemeData lightTheme = ThemeData(
   brightness: Brightness.light,
   primaryColor: primaryYellow,
   scaffoldBackgroundColor: lightBackground,
-  fontFamily: 'Poppins',
+  fontFamily: GoogleFonts.lexend().fontFamily,
   useMaterial3: true,
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(fontWeight: FontWeight.bold, color: lightText),
-    headlineSmall: TextStyle(fontWeight: FontWeight.bold, color: lightText),
-    titleMedium: TextStyle(fontWeight: FontWeight.bold, color: lightText),
-    bodyMedium: TextStyle(color: Colors.black54),
-    labelLarge: TextStyle(fontWeight: FontWeight.bold, color: lightText),
+  textTheme: TextTheme(
+    displayLarge: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: lightText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    headlineSmall: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: lightText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    titleMedium: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: lightText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    bodyMedium: TextStyle(
+      color: Colors.black54,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    labelLarge: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: lightText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: lightBackground,
@@ -41,9 +61,9 @@ final ThemeData lightTheme = ThemeData(
       shape: const StadiumBorder(),
       backgroundColor: primaryYellow,
       foregroundColor: lightText,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
@@ -52,9 +72,9 @@ final ThemeData lightTheme = ThemeData(
       shape: const StadiumBorder(),
       foregroundColor: lightText,
       side: const BorderSide(color: lightText, width: 2),
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
@@ -64,16 +84,43 @@ final ThemeData lightTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: Colors.black,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.w500,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
   progressIndicatorTheme: const ProgressIndicatorThemeData(
-    color:
-        primaryYellow, // Overrides the colorScheme.primary for circular indicators
-    circularTrackColor:
-        primaryYellow, // Sets the track color for circular indicators
+    color: primaryYellow,
+    circularTrackColor: primaryYellow,
+  ),
+  cardTheme: CardThemeData(
+    color: Color(0xffe6e8e7),
+    clipBehavior: Clip.antiAlias,
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12.0)),
+  ),
+  chipTheme: ChipThemeData(
+    shape: const StadiumBorder(),
+    backgroundColor: primaryYellow,
+    labelStyle: const TextStyle(color: Colors.black, fontSize: 16.0),
+    padding: const EdgeInsets.all(8.0),
+    elevation: 4.0,
+    side: BorderSide.none,
+  ),
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: lightBackground,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+    ),
+    elevation: 5.0,
+    showDragHandle: true,
+  ),
+  navigationBarTheme: NavigationBarThemeData(
+    indicatorColor: Color(0xff323f76),
+    backgroundColor: primaryYellow,
+    iconTheme: WidgetStateProperty.all(
+      const IconThemeData(color: Color(0xFF232122)),
+    ),
   ),
 );

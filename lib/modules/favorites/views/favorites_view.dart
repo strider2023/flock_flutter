@@ -83,7 +83,7 @@ class FavoritesView extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: isSelected
-                  ? Theme.of(context).textTheme.labelLarge?.color
+                  ? Colors.black
                   : Theme.of(context).textTheme.bodyMedium?.color,
             ),
           ),

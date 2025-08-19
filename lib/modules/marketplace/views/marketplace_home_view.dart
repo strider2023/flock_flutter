@@ -1,11 +1,14 @@
 // lib/marketplace/views/marketplace_home_view.dart
 
+import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flock_flutter/common/widgets/app_carousel.dart';
 import 'package:flock_flutter/modules/marketplace/models/brand_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
 import '../../../common/models/header_action.dart';
+import '../../../common/viewmodels/navigation_viewmodel.dart';
 import '../../../common/widgets/home_header.dart';
 import '../models/marketplace_feed_model.dart';
 import '../models/product_model.dart';
@@ -13,7 +16,6 @@ import '../viewmodels/marketplace_viewmodel.dart';
 import '../widgets/brand_card.dart';
 import '../widgets/marketplace_section.dart';
 import '../widgets/product_card.dart';
-import '../widgets/product_carousel_section.dart';
 
 class MarketplaceHomeView extends StatelessWidget {
   MarketplaceHomeView({super.key});
@@ -32,7 +34,11 @@ class MarketplaceHomeView extends StatelessWidget {
     return Scaffold(
       appBar: HomeHeader(
         actions: headerActions,
-        onActionPressed: (actionName) {},
+        onActionPressed: (actionName) {
+          if (actionName == 'search') {
+            context.read<NavigationViewModel>().changeTab(1);
+          }
+        },
       ),
       body: _buildBody(context, viewModel),
     );
@@ -51,18 +57,30 @@ class MarketplaceHomeView extends StatelessWidget {
       itemCount: viewModel.feedItems.length + 1,
       itemBuilder: (context, index) {
         if (index == viewModel.feedItems.length) {
-          return const SizedBox(height: 100);
+          return const SizedBox(height: 10);
         }
 
         final section = viewModel.feedItems[index];
 
         if (section is CarouselSection) {
-          return ProductCarouselSection(section: section);
+          return AppCarousel<ProductModel>(
+            items: section.products,
+            itemBuilder: (context, product) {
+              return ProductCard(product: product);
+            },
+            options: CarouselOptions(
+              height: 300,
+              viewportFraction: 1,
+              enlargeCenterPage: false,
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 7),
+            ),
+          );
         } else if (section is CategoryProductSection) {
           return MarketplaceSection<ProductModel>(
             title: section.title,
             items: section.products,
-            listHeight: 320,
+            listHeight: 300,
             onSeeMore: () => debugPrint("See more products"),
             itemBuilder: (product) => ProductCard(product: product),
           );

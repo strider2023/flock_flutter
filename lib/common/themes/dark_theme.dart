@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 // Define theme colors
 const Color primaryYellow = Color(0xFFFFC549);
@@ -10,14 +11,33 @@ final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
   primaryColor: primaryYellow,
   scaffoldBackgroundColor: darkBackground,
-  fontFamily: 'Poppins',
+  fontFamily: GoogleFonts.lexend().fontFamily,
   useMaterial3: true,
-  textTheme: const TextTheme(
-    displayLarge: TextStyle(fontWeight: FontWeight.bold, color: darkText),
-    headlineSmall: TextStyle(fontWeight: FontWeight.bold, color: darkText),
-    titleMedium: TextStyle(fontWeight: FontWeight.bold, color: darkText),
-    bodyMedium: TextStyle(color: Colors.white70),
-    labelLarge: TextStyle(fontWeight: FontWeight.bold, color: lightText),
+  textTheme: TextTheme(
+    displayLarge: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: darkText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    headlineSmall: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: darkText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    titleMedium: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: darkText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    bodyMedium: TextStyle(
+      color: darkText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
+    labelLarge: TextStyle(
+      fontWeight: FontWeight.bold,
+      color: darkText,
+      fontFamily: GoogleFonts.lexend().fontFamily,
+    ),
   ),
   appBarTheme: const AppBarTheme(
     backgroundColor: darkBackground,
@@ -41,9 +61,9 @@ final ThemeData darkTheme = ThemeData(
       shape: const StadiumBorder(),
       backgroundColor: primaryYellow,
       foregroundColor: lightText,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
@@ -52,9 +72,9 @@ final ThemeData darkTheme = ThemeData(
       shape: const StadiumBorder(),
       foregroundColor: darkText,
       side: const BorderSide(color: darkText, width: 2),
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.bold,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
@@ -64,14 +84,15 @@ final ThemeData darkTheme = ThemeData(
   textButtonTheme: TextButtonThemeData(
     style: TextButton.styleFrom(
       foregroundColor: primaryYellow,
-      textStyle: const TextStyle(
+      textStyle: TextStyle(
         fontWeight: FontWeight.w500,
-        fontFamily: 'Poppins',
+        fontFamily: GoogleFonts.lexend().fontFamily,
       ),
     ),
   ),
   navigationBarTheme: NavigationBarThemeData(
     indicatorColor: primaryYellow,
+    backgroundColor: Color(0xff323f76),
     iconTheme: WidgetStateProperty.all(
       const IconThemeData(color: Colors.white),
     ),
@@ -81,5 +102,28 @@ final ThemeData darkTheme = ThemeData(
         primaryYellow, // Overrides the colorScheme.primary for circular indicators
     circularTrackColor:
         primaryYellow, // Sets the track color for circular indicators
+  ),
+  cardTheme: CardThemeData(
+    color: Colors.blueGrey[800],
+    clipBehavior: Clip.antiAlias,
+    elevation: 0,
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20.0)),
+  ),
+  chipTheme: ChipThemeData(
+    shape: const StadiumBorder(),
+    backgroundColor: primaryYellow,
+    selectedColor: primaryYellow,
+    labelStyle: const TextStyle(color: Colors.black, fontSize: 16.0),
+    padding: const EdgeInsets.all(8.0),
+    elevation: 4.0,
+    side: BorderSide.none,
+  ),
+  bottomSheetTheme: BottomSheetThemeData(
+    backgroundColor: darkBackground,
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(20.0)),
+    ),
+    elevation: 5.0,
+    showDragHandle: true,
   ),
 );

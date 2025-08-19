@@ -2,6 +2,7 @@ import 'package:flock_flutter/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'common/viewmodels/navigation_viewmodel.dart';
 import 'modules/auth/viewmodels/auth_viewmodel.dart';
 import 'modules/campaigns/repositories/campaign_repository.dart';
 import 'modules/campaigns/viewmodels/campaign_viewmodel.dart';
@@ -39,6 +40,9 @@ class MainAppView extends StatelessWidget {
           create: (_) => FavoritesRepository(authToken: token),
         ),
 
+        ChangeNotifierProvider<NavigationViewModel>(
+          create: (_) => NavigationViewModel(),
+        ),
         ChangeNotifierProvider<MarketplaceViewModel>(
           create: (context) => MarketplaceViewModel(
             repository: context.read<MarketplaceRepository>(),
@@ -66,7 +70,7 @@ class MainAppView extends StatelessWidget {
       ],
       // This child could be a Scaffold with a BottomNavigationBar
       // that switches between your main pages.
-      child: const HomePage(), // Replace with your actual home UI
+      child: HomePage(), // Replace with your actual home UI
     );
   }
 }

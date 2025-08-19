@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
@@ -17,17 +16,8 @@ class FeedCard extends StatefulWidget {
 class _FeedCardState extends State<FeedCard> {
   @override
   Widget build(BuildContext context) {
-    // ✨ CHANGED: The root widget is now a Card.
     return Card(
-      // The margin is applied directly to the Card.
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      // The shape property is used to maintain the border radius.
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-      // Ensures content inside the card respects the rounded corners.
-      clipBehavior: Clip.antiAlias,
-      // Elevation is set to 0 to remove any shadow.
-      elevation: 0,
-      // The Card's child is the content that was previously in the Container.
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -35,7 +25,7 @@ class _FeedCardState extends State<FeedCard> {
           children: [
             _buildHeader(),
             const SizedBox(height: 12),
-            _buildImageCarousel(),
+            _buildImage(), // ✨ CHANGED: Swapped carousel for a single image
             const SizedBox(height: 12),
             _buildInteractionBar(),
             const SizedBox(height: 12),
@@ -68,7 +58,7 @@ class _FeedCardState extends State<FeedCard> {
             child: Text(
               'Follow',
               style: TextStyle(
-                fontSize: Theme.of(context).textTheme.bodyMedium?.fontSize,
+                fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
               ),
             ),
           ),
@@ -77,54 +67,41 @@ class _FeedCardState extends State<FeedCard> {
     );
   }
 
-  /// Builds the image carousel with rounded corners and an overlay chip.
-  Widget _buildImageCarousel() {
+  /// ✨ RENAMED & UPDATED: Builds a single image with rounded corners and an overlay chip.
+  Widget _buildImage() {
     final daysPending = widget.item.campaignEndDate
         .difference(DateTime.now())
         .inDays;
 
     return Stack(
       children: [
-        ClipRRect(
-          borderRadius: BorderRadius.circular(15.0),
-          child: CarouselSlider(
-            options: CarouselOptions(
+        // Ensure the list is not empty before accessing the first image
+        if (widget.item.imageUrls.isNotEmpty)
+          ClipRRect(
+            borderRadius: BorderRadius.circular(20.0),
+            child: Image.network(
+              widget.item.imageUrls.first, // Display the first image
               height: 200,
-              viewportFraction: 1.0, // Full width images
-              autoPlay: false,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              errorBuilder: (context, error, stackTrace) => Container(
+                height: 200,
+                color: Colors.grey[200],
+                child: const Center(child: Icon(Icons.error)),
+              ),
             ),
-            items: widget.item.imageUrls.map((imageUrl) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Image.network(
-                    imageUrl,
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                    errorBuilder: (context, error, stackTrace) => Container(
-                      color: Colors.grey[200],
-                      child: const Center(child: Icon(Icons.error)),
-                    ),
-                  );
-                },
-              );
-            }).toList(),
           ),
-        ),
         Positioned(
           bottom: 10,
           left: 10,
           child: Chip(
-            shape: const StadiumBorder(),
             avatar: Icon(Icons.rocket_launch, size: 16, color: Colors.black),
             label: Text(
               '$daysPending days to go',
               style: TextStyle(
-                color: Colors.black,
                 fontSize: Theme.of(context).textTheme.bodySmall?.fontSize,
               ),
             ),
-            backgroundColor: Theme.of(context).primaryColor,
-            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
           ),
         ),
       ],

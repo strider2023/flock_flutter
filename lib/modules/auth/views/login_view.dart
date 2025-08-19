@@ -117,7 +117,6 @@ class _LoginViewState extends State<LoginView>
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: Theme.of(context).textTheme.bodyLarge?.fontSize,
-                    color: Theme.of(context).primaryColor,
                   ),
                 ),
               ],

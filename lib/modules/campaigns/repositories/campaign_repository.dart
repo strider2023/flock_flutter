@@ -50,8 +50,7 @@ class CampaignRepository {
       return FeedItem(
         id: index,
         imageUrls: [
-          'https://images.squarespace-cdn.com/content/v1/64370d26da28bc38144ca6e4/1682645870375-GUGT050JBKU3S7JL9G99/5.png',
-          'https://picsum.photos/id/${300 + index}/400/400',
+          'https://blog-static.userpilot.com/blog/wp-content/uploads/2024/07/16-best-product-marketing-campaigns-to-inspire-your-own_e14b5a501710a24ed1169705a0e91905_2000.png',
         ],
         title: 'Campaign Title #${index + 1}',
         description: 'This is a compelling description for item ${index + 1}.',
