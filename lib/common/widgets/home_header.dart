@@ -22,7 +22,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
       // Dynamically build the actions from the list provided.
       actions: actions.map((action) {
         return IconButton(
-          icon: Iconify(action.icon, color: Colors.green.shade800),
+          icon: Iconify(action.icon),
           onPressed: () {
             // Emit the action name when the icon is pressed.
             onActionPressed(action.actionName);

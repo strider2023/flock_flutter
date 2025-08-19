@@ -1,9 +1,12 @@
-import 'package:flock_flutter/modules/feed/feed.dart';
-import 'package:flock_flutter/modules/marketplace/marketplace.dart';
-import 'package:flock_flutter/modules/profile/profile.dart';
+import 'package:flock_flutter/modules/campaigns/views/campaign_home_view.dart';
 import 'package:flutter/material.dart';
 import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
+
+import 'modules/favorites/views/favorites_view.dart';
+import 'modules/marketplace/views/marketplace_home_view.dart';
+import 'modules/profile/views/profile_view.dart';
+import 'modules/search/views/search_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -16,11 +19,11 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    FeedPage(),
-    PlaceholderWidget(text: 'Search'),
-    MarketplaceHome(),
-    PlaceholderWidget(text: 'Liked'),
-    ProfilePage(),
+    CampaignHomeView(),
+    SearchPage(),
+    MarketplaceHomeView(),
+    FavoritesView(),
+    ProfileView(),
   ];
 
   void _onItemTapped(int index) {
@@ -32,77 +35,52 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // The body is now a Stack, which allows widgets to be layered.
-      body: Stack(
-        children: [
-          // This is your main page content.
-          Center(child: _widgetOptions.elementAt(_selectedIndex)),
-          // The Align widget positions the navigation bar at the bottom of the Stack.
-          Align(alignment: Alignment.bottomCenter, child: _buildBottomNavBar()),
-        ],
-      ),
-      // The bottomNavigationBar property has been removed from the Scaffold.
-    );
-  }
-
-  Widget _buildBottomNavBar() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
-      decoration: BoxDecoration(
-        color: Colors.green.shade800,
-        borderRadius: BorderRadius.circular(50),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.shade200,
-            spreadRadius: 1,
-            blurRadius: 20,
-            offset: const Offset(0, 10),
+      // The body now directly shows the selected page from the list.
+      body: Center(child: _widgetOptions.elementAt(_selectedIndex)),
+      // The BottomNavigationBar is now a standard Material widget.
+      bottomNavigationBar: BottomNavigationBar(
+        // The list of items for the navigation bar.
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Iconify(Ri.home_7_line),
+            activeIcon: Iconify(Ri.home_7_fill),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Iconify(Ri.search_2_line),
+            activeIcon: Iconify(Ri.search_2_fill),
+            label: 'Search',
+          ),
+          BottomNavigationBarItem(
+            icon: Iconify(Ri.shopping_bag_2_line),
+            activeIcon: Iconify(Ri.shopping_bag_2_fill),
+            label: 'Market',
+          ),
+          BottomNavigationBarItem(
+            icon: Iconify(Ri.heart_3_line),
+            activeIcon: Iconify(Ri.heart_3_fill),
+            label: 'Liked',
+          ),
+          BottomNavigationBarItem(
+            icon: Iconify(Ri.user_6_line),
+            activeIcon: Iconify(Ri.user_6_fill),
+            label: 'Profile',
           ),
         ],
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          _buildNavItem(Ri.home_7_fill, 0),
-          _buildNavItem(Ri.search_2_fill, 1),
-          _buildNavItem(Ri.shopping_bag_2_fill, 2),
-          _buildNavItem(Ri.heart_3_fill, 3),
-          _buildNavItem(Ri.menu_fill, 4),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildNavItem(String icon, int index) {
-    return GestureDetector(
-      onTap: () => _onItemTapped(index),
-      child: CircleAvatar(
-        radius: 25,
-        backgroundColor: _selectedIndex == index
-            ? Color(0xFFF4FDDF)
-            : Colors.green.shade800,
-        child: Iconify(
-          icon,
-          color: _selectedIndex == index
-              ? Colors.green.shade800
-              : Color(0xFFF4FDDF),
-        ),
-      ),
-    );
-  }
-}
-
-class PlaceholderWidget extends StatelessWidget {
-  final String text;
-  const PlaceholderWidget({super.key, required this.text});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(text), automaticallyImplyLeading: false),
-      body: Center(
-        child: Text(text, style: Theme.of(context).textTheme.headlineSmall),
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        // --- Theming for the Navigation Bar ---
+        // Sets the type to fixed for consistent background color.
+        type: BottomNavigationBarType.fixed,
+        // Uses the primary color from your theme for the selected item.
+        selectedItemColor: Theme.of(context).primaryColor,
+        // Uses a muted grey for unselected items.
+        unselectedItemColor: Colors.grey.shade600,
+        // Hides the labels for a cleaner look.
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        // Removes the top border for a seamless look with the content.
+        elevation: 0,
       ),
     );
   }

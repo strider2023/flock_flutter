@@ -1,4 +1,4 @@
-import 'package:flock_flutter/modules/feed/models/carousel_item.dart';
+import 'package:flock_flutter/modules/campaigns/models/carousel_item.dart';
 import 'package:flutter/material.dart';
 
 class CarouselItemCard extends StatelessWidget {

@@ -1,4 +1,4 @@
-import 'package:flock_flutter/modules/feed/models/feed_item.dart';
+import 'package:flock_flutter/modules/campaigns/models/campaign_item.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:intl/intl.dart';
