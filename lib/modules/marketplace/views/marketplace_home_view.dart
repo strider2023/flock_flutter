@@ -64,7 +64,7 @@ class MarketplaceHomeView extends StatelessWidget {
     }
 
     return ListView.builder(
-      itemCount: viewModel.feedItems.length + 1,
+      itemCount: viewModel.feedItems.length,
       itemBuilder: (context, index) {
         final section = viewModel.feedItems[index];
 
