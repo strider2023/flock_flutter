@@ -10,6 +10,8 @@ import 'modules/favorites/repositories/favorites_repository.dart';
 import 'modules/favorites/viewmodels/favorites_viewmodel.dart';
 import 'modules/marketplace/repositories/marketplace_repository.dart';
 import 'modules/marketplace/viewmodels/marketplace_viewmodel.dart';
+import 'modules/notifications/repositories/notification_repository.dart';
+import 'modules/notifications/viewmodels/notification_viewmodel.dart';
 import 'modules/profile/repositories/profile_repository.dart';
 import 'modules/profile/viewmodels/profile_viewmodel.dart';
 import 'modules/search/repositories/search_repository.dart';
@@ -39,6 +41,9 @@ class MainAppView extends StatelessWidget {
         Provider<FavoritesRepository>(
           create: (_) => FavoritesRepository(authToken: token),
         ),
+        Provider<NotificationRepository>(
+          create: (_) => NotificationRepository(authToken: token),
+        ),
 
         ChangeNotifierProvider<NavigationViewModel>(
           create: (_) => NavigationViewModel(),
@@ -65,6 +70,11 @@ class MainAppView extends StatelessWidget {
         ChangeNotifierProvider<FavoritesViewModel>(
           create: (context) => FavoritesViewModel(
             repository: context.read<FavoritesRepository>(),
+          ),
+        ),
+        ChangeNotifierProvider<NotificationViewModel>(
+          create: (context) => NotificationViewModel(
+            repository: context.read<NotificationRepository>(),
           ),
         ),
       ],

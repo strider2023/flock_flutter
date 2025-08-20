@@ -71,9 +71,8 @@ class _AppCarouselState<T> extends State<AppCarousel<T>> {
                 ),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: (Theme.of(context).primaryColor).withOpacity(
-                    _current == entry.key ? 0.9 : 0.4,
-                  ),
+                  color: (Theme.of(context).textTheme.displayLarge?.color)
+                      ?.withOpacity(_current == entry.key ? 0.9 : 0.4),
                 ),
               );
             }).toList(),

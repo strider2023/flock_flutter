@@ -1,6 +1,6 @@
 // lib/models/home_feed_model.dart
 
-import 'product_model.dart';
+import '../../../common/models/product_model.dart';
 import 'brand_model.dart';
 
 // Abstract class that all section models will implement.

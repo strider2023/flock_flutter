@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../repositories/auth_repository.dart';
 import '../viewmodels/auth_viewmodel.dart';
@@ -52,11 +53,13 @@ class _SignUpViewState extends State<SignUpView> {
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
         Text(
-          'Create Account',
+          'Join the Flock.',
           textAlign: TextAlign.center,
-          style: Theme.of(
-            context,
-          ).textTheme.headlineMedium?.copyWith(fontFamily: 'FlockFont'),
+          style: GoogleFonts.tinos(
+            fontSize: Theme.of(context).textTheme.headlineMedium?.fontSize,
+            fontWeight: FontWeight.bold,
+            color: Theme.of(context).primaryColor,
+          ),
         ),
         const SizedBox(height: 8),
         Text(
@@ -126,7 +129,7 @@ class _SignUpViewState extends State<SignUpView> {
           ElevatedButton(
             // onPressed is linked to the ViewModel's signUp method.
             onPressed: viewModel.signUp,
-            child: const Text('Sign Up'),
+            child: const Text('Join Flock'),
           ),
 
         // --- Error Message Display ---

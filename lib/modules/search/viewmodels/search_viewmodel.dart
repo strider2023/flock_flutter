@@ -2,7 +2,7 @@
 
 import 'dart:async';
 
-import '../models/product.dart';
+import '../../../common/models/product_model.dart';
 import '../repositories/search_repository.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class SearchViewModel extends ChangeNotifier {
 
   // --- STATE ---
   SearchState _state = SearchState.initial;
-  List<Product> _searchResults = [];
+  List<ProductModel> _searchResults = [];
   List<String> _lastSearched = [];
   List<String> _trendingItems = [];
   List<String> _suggestions = []; // ✨ NEW: State for suggestions
@@ -27,7 +27,7 @@ class SearchViewModel extends ChangeNotifier {
 
   // --- GETTERS ---
   SearchState get state => _state;
-  List<Product> get searchResults => _searchResults;
+  List<ProductModel> get searchResults => _searchResults;
   List<String> get lastSearched => _lastSearched;
   List<String> get trendingItems => _trendingItems;
   List<String> get suggestions => _suggestions; // ✨ NEW: Getter for suggestions

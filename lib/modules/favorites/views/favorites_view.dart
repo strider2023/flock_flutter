@@ -15,7 +15,11 @@ class FavoritesView extends StatelessWidget {
     final viewModel = context.watch<FavoritesViewModel>();
 
     return Scaffold(
-      appBar: HomeHeader(actions: [], onActionPressed: (actionName) {}),
+      appBar: HomeHeader(
+        showBackButton: true,
+        actions: [],
+        onActionPressed: (actionName) {},
+      ),
       body: Column(
         children: [
           _buildPillTabBar(context, viewModel),

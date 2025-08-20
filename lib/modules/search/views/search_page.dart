@@ -2,9 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../../common/widgets/product_card.dart';
 import '../viewmodels/search_viewmodel.dart';
 import '../widgets/chip_row.dart';
-import '../widgets/product_grid.dart';
 import '../widgets/sort_filter_buttons.dart';
 
 class SearchPage extends StatefulWidget {
@@ -117,7 +117,6 @@ class _SearchPageState extends State<SearchPage> {
               );
             },
           ),
-          automaticallyImplyLeading: false,
           elevation: 0,
           scrolledUnderElevation: 0,
         ),
@@ -173,13 +172,21 @@ class _SearchPageState extends State<SearchPage> {
               if (vm.state == SearchState.loading) {
                 return const Center(child: CircularProgressIndicator());
               }
-              if (vm.state == SearchState.error) {
-                return const Center(child: Text('Something went wrong!'));
-              }
               if (vm.searchResults.isEmpty) {
                 return const Center(child: Text('No results found.'));
               }
-              return ProductGrid(products: vm.searchResults);
+              // This ListView replaces the old GridView.
+              return ListView.builder(
+                padding: const EdgeInsets.symmetric(vertical: 8.0),
+                itemCount: vm.searchResults.length,
+                itemBuilder: (context, index) {
+                  // Use the common ProductCard in horizontal mode.
+                  return ProductCard(
+                    product: vm.searchResults[index],
+                    mode: CardMode.horizontal,
+                  );
+                },
+              );
             },
           ),
         ),

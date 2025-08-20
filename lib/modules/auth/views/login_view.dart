@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../../common/widgets/social_login_button.dart';
 import '../repositories/auth_repository.dart';
@@ -104,11 +105,11 @@ class _LoginViewState extends State<LoginView>
             child: Column(
               children: [
                 Text(
-                  'Flock',
+                  'Flock.',
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontFamily: 'FlockFont',
+                  style: GoogleFonts.tinos(
                     fontSize: 72,
+                    fontWeight: FontWeight.bold,
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
@@ -230,7 +231,7 @@ class _LoginViewState extends State<LoginView>
             const Text("Don't have an account?"),
             TextButton(
               onPressed: widget.onSignUpTapped,
-              child: const Text('Sign Up'),
+              child: const Text('Join Flock.'),
             ),
           ],
         ),

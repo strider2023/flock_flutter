@@ -1,6 +1,6 @@
 // data/repositories/product_repository.dart
 
-import '../models/product.dart';
+import '../../../common/models/product_model.dart';
 
 class SearchRepository {
   final String authToken;
@@ -8,42 +8,28 @@ class SearchRepository {
   SearchRepository({required this.authToken});
 
   // --- DUMMY DATA (Simulates a database or API) ---
-  final List<Product> _allProducts = [
-    Product(
-      name: 'Nike Air Force 1',
-      type: 'Sneakers',
+  final List<ProductModel> _allProducts = [
+    ProductModel(
+      itemName: 'Nike Air Force 1',
+      vendorName: 'Nike',
+      category: 'Lifestyle Sneakers',
       imageUrl:
-          'https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=800&q=60',
+          'https://images.unsplash.com/photo-1542291026-7eec2c27ff?auto=format&fit=crop&w=800&q=60',
+      purchasePrice: 8195.00,
+      rating: 4.8,
+      ratingCount: 1250,
+      discountPercentage: 15,
+      actualPrice: 9641.00,
     ),
-    Product(
-      name: 'Adidas Stan Smith',
-      type: 'Sneakers',
-      imageUrl:
-          'https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?auto=format&fit=crop&w=800&q=60',
-    ),
-    Product(
-      name: 'Levi\'s 501',
-      type: 'Jeans',
-      imageUrl:
-          'https://images.unsplash.com/photo-1602293589914-9e5c54a36e45?auto=format&fit=crop&w=800&q=60',
-    ),
-    Product(
-      name: 'Ray-Ban Aviator',
-      type: 'Sunglasses',
-      imageUrl:
-          'https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=60',
-    ),
-    Product(
-      name: 'Apple Watch SE',
-      type: 'Smart Watch',
-      imageUrl:
-          'https://images.unsplash.com/photo-1579586337278-35d18b068f3d?auto=format&fit=crop&w=800&q=60',
-    ),
-    Product(
-      name: 'Sony WH-1000XM5',
-      type: 'Headphones',
+    ProductModel(
+      itemName: 'Levi\'s 501 Jeans',
+      vendorName: 'Levis',
+      category: 'Clothes',
       imageUrl:
           'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=800&q=60',
+      purchasePrice: 29990.00,
+      rating: 4.9,
+      ratingCount: 890,
     ),
   ];
 
@@ -82,7 +68,7 @@ class SearchRepository {
     return _trendingItems;
   }
 
-  Future<List<Product>> searchProducts(String query) async {
+  Future<List<ProductModel>> searchProducts(String query) async {
     await Future.delayed(
       const Duration(milliseconds: 800),
     ); // Simulate network search
@@ -91,8 +77,8 @@ class SearchRepository {
     return _allProducts
         .where(
           (product) =>
-              product.name.toLowerCase().contains(query.toLowerCase()) ||
-              product.type.toLowerCase().contains(query.toLowerCase()),
+              product.itemName.toLowerCase().contains(query.toLowerCase()) ||
+              product.vendorName.toLowerCase().contains(query.toLowerCase()),
         )
         .toList();
   }
@@ -105,9 +91,10 @@ class SearchRepository {
 
     return _allProducts
         .where(
-          (product) => product.name.toLowerCase().contains(query.toLowerCase()),
+          (product) =>
+              product.itemName.toLowerCase().contains(query.toLowerCase()),
         )
-        .map((product) => product.name)
+        .map((product) => product.itemName)
         .toList();
   }
 }

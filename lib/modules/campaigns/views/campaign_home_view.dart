@@ -23,7 +23,6 @@ class CampaignHomeView extends StatelessWidget {
     final feedViewModel = context.read<FeedViewModel>();
 
     final List<HeaderAction> headerActions = [
-      HeaderAction(icon: Ri.notification_3_line, actionName: 'notifications'),
       HeaderAction(icon: Ri.filter_3_fill, actionName: 'filter'),
     ];
 

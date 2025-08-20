@@ -1,5 +1,5 @@
 name: flock_flutter
-description: "A new Flutter project."
+description: "An crowd-funding ecommerce application."
 publish_to: "none"
 version: 0.1.0
 
@@ -19,6 +19,7 @@ dependencies:
   iconify_flutter: ^0.0.7
   provider: ^6.1.5
   google_fonts: ^6.3.0
+  timeago: ^3.7.1
 
 dev_dependencies:
   flutter_test:
@@ -29,9 +30,6 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-  fonts:
-    - family: FlockFont
-      fonts:
-        - asset: assets/fonts/Galada-Regular.ttf
   assets:
     - assets/icons/
+    - assets/images/

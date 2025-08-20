@@ -10,16 +10,18 @@ class MarketplaceViewModel extends ChangeNotifier {
 
   MarketplaceViewModel({required MarketplaceRepository repository})
     : _repository = repository {
-    fetchMarketplaceFeed();
+    fetchMarketplaceData();
   }
 
   // --- STATE ---
   bool _isLoading = true;
   List<FeedSection> _feedItems = [];
+  int _activeCampaignsCount = 0;
 
   // --- GETTERS --- (The View will listen to these)
   bool get isLoading => _isLoading;
   List<FeedSection> get feedItems => _feedItems;
+  int get activeCampaignsCount => _activeCampaignsCount;
 
   // --- PUBLIC METHODS --- (The View will call these)
   Future<void> fetchMarketplaceFeed() async {
@@ -35,5 +37,25 @@ class MarketplaceViewModel extends ChangeNotifier {
 
     _isLoading = false;
     notifyListeners(); // Notify UI that data is ready or an error occurred
+  }
+
+  Future<void> fetchMarketplaceData() async {
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      // Fetch both sets of data in parallel
+      final results = await Future.wait([
+        _repository.getMarketplaceFeed(),
+        _repository.getActiveCampaignsCount(),
+      ]);
+      _feedItems = results[0] as List<FeedSection>;
+      _activeCampaignsCount = results[1] as int;
+    } catch (e) {
+      debugPrint("Error fetching marketplace data: $e");
+    }
+
+    _isLoading = false;
+    notifyListeners();
   }
 }

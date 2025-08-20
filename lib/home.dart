@@ -5,19 +5,17 @@ import 'package:iconify_flutter/icons/ri.dart';
 import 'package:provider/provider.dart';
 
 import 'common/viewmodels/navigation_viewmodel.dart';
-import 'modules/favorites/views/favorites_view.dart';
 import 'modules/marketplace/views/marketplace_home_view.dart';
+import 'modules/notifications/views/notification_view.dart';
 import 'modules/profile/views/profile_view.dart';
-import 'modules/search/views/search_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
   static final List<Widget> _widgetOptions = <Widget>[
-    CampaignHomeView(),
-    SearchPage(),
     MarketplaceHomeView(),
-    FavoritesView(),
+    CampaignHomeView(),
+    NotificationView(),
     ProfileView(),
   ];
 
@@ -30,24 +28,19 @@ class HomePage extends StatelessWidget {
 
     return [
       NavigationDestination(
-        icon: Iconify(Ri.home_7_line, color: unselectedColor),
-        selectedIcon: Iconify(Ri.home_7_fill, color: selectedColor),
-        label: 'Home',
-      ),
-      NavigationDestination(
-        icon: Iconify(Ri.search_2_line, color: unselectedColor),
-        selectedIcon: Iconify(Ri.search_2_fill, color: selectedColor),
-        label: 'Search',
-      ),
-      NavigationDestination(
         icon: Iconify(Ri.shopping_bag_2_line, color: unselectedColor),
         selectedIcon: Iconify(Ri.shopping_bag_2_fill, color: selectedColor),
         label: 'Market',
       ),
       NavigationDestination(
-        icon: Iconify(Ri.heart_3_line, color: unselectedColor),
-        selectedIcon: Iconify(Ri.heart_3_fill, color: selectedColor),
-        label: 'Liked',
+        icon: Iconify(Ri.hand_heart_line, color: unselectedColor),
+        selectedIcon: Iconify(Ri.hand_heart_fill, color: selectedColor),
+        label: 'Fund It',
+      ),
+      NavigationDestination(
+        icon: Iconify(Ri.notification_3_line, color: unselectedColor),
+        selectedIcon: Iconify(Ri.notification_3_fill, color: selectedColor),
+        label: 'Notifications',
       ),
       NavigationDestination(
         icon: Iconify(Ri.user_6_line, color: unselectedColor),

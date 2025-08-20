@@ -39,15 +39,15 @@ final ThemeData darkTheme = ThemeData(
       fontFamily: GoogleFonts.lexend().fontFamily,
     ),
   ),
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     backgroundColor: darkBackground,
     foregroundColor: darkText,
     elevation: 0,
-    iconTheme: IconThemeData(color: primaryYellow),
-    titleTextStyle: TextStyle(
-      fontFamily: 'FlockFont',
-      fontSize: 32.0,
-      color: darkText,
+    iconTheme: const IconThemeData(color: primaryYellow),
+    titleTextStyle: GoogleFonts.tinos(
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
+      color: primaryYellow,
     ),
   ),
   inputDecorationTheme: InputDecorationTheme(

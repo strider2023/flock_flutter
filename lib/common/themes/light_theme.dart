@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 // Define theme colors
 const Color primaryYellow = Color(0xFFFFC549);
 const Color secondaryTomato = Color(0xffef6a3f);
-const Color lightText = Colors.black;
+const Color lightText = Color(0xFF232122);
 const Color lightBackground = Color(0xFFfbfbfb);
 
 final ThemeData lightTheme = ThemeData(
@@ -39,14 +39,14 @@ final ThemeData lightTheme = ThemeData(
       fontFamily: GoogleFonts.lexend().fontFamily,
     ),
   ),
-  appBarTheme: const AppBarTheme(
+  appBarTheme: AppBarTheme(
     backgroundColor: lightBackground,
     foregroundColor: lightText,
     elevation: 0,
-    iconTheme: IconThemeData(color: lightText),
-    titleTextStyle: TextStyle(
-      fontFamily: 'FlockFont',
-      fontSize: 32.0,
+    iconTheme: const IconThemeData(color: lightText),
+    titleTextStyle: GoogleFonts.tinos(
+      fontSize: 32,
+      fontWeight: FontWeight.bold,
       color: lightText,
     ),
   ),

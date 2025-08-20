@@ -5,12 +5,14 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 
 class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
   final String title;
+  final bool showBackButton;
   final List<HeaderAction> actions;
   final void Function(String actionName) onActionPressed;
 
   const HomeHeader({
     super.key,
-    this.title = 'Flock', // Default title
+    this.title = 'Flock.',
+    this.showBackButton = false,
     required this.actions,
     required this.onActionPressed,
   });
@@ -31,7 +33,7 @@ class HomeHeader extends StatelessWidget implements PreferredSizeWidget {
           },
         );
       }).toList(),
-      automaticallyImplyLeading: false,
+      automaticallyImplyLeading: showBackButton,
       elevation: 0,
       scrolledUnderElevation: 0, // Set color for title and icons
     );
