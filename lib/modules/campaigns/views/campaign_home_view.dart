@@ -6,6 +6,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 
 import '../../../common/models/header_action.dart';
+import '../../../common/viewmodels/category_viewmodel.dart';
 import '../../../common/widgets/app_carousel.dart';
 import '../../../common/widgets/home_header.dart';
 import '../models/carousel_item.dart';
@@ -28,6 +29,7 @@ class CampaignHomeView extends StatelessWidget {
 
     return Scaffold(
       appBar: HomeHeader(
+        title: 'Fund It.',
         actions: headerActions,
         onActionPressed: (actionName) {
           if (actionName == 'filter') {
@@ -50,11 +52,19 @@ class CampaignHomeView extends StatelessWidget {
   void _showFilterPanel(BuildContext context, FeedViewModel viewModel) async {
     final result = await showModalBottomSheet<Map<String, String?>>(
       context: context,
-      builder: (_) => FilterPanel(
-        initialCampaignFilter: viewModel.activeCampaignFilter,
-        initialLikeSortOrder: viewModel.activeLikeSortOrder,
-      ),
       isScrollControlled: true,
+      builder: (_) {
+        // ✨ FIX: Wrap the FilterPanel with a provider for CategoryViewModel.
+        return ChangeNotifierProvider.value(
+          // Read the existing CategoryViewModel instance from the main context.
+          value: context.read<CategoryViewModel>(),
+          // Now, the FilterPanel and its child (CategoryList) can find the provider.
+          child: FilterPanel(
+            initialCampaignFilter: viewModel.activeCampaignFilter,
+            initialLikeSortOrder: viewModel.activeLikeSortOrder,
+          ),
+        );
+      },
     );
 
     if (result != null) {

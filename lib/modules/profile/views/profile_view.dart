@@ -1,5 +1,7 @@
 // lib/profile/views/profile_view.dart
 
+import 'package:flock_flutter/modules/profile/viewmodels/edit_profile_viewmodel.dart';
+import 'package:flock_flutter/modules/profile/views/edit_profile_view.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +9,8 @@ import 'package:iconify_flutter/iconify_flutter.dart';
 import 'package:iconify_flutter/icons/ri.dart';
 import '../../../common/models/header_action.dart';
 import '../../../common/widgets/home_header.dart';
+import '../../addresses/viewmodels/address_viewmodel.dart';
+import '../../addresses/views/manage_addresses_view.dart';
 import '../../favorites/viewmodels/favorites_viewmodel.dart';
 import '../../favorites/views/favorites_view.dart';
 import '../models/user_model.dart';
@@ -26,6 +30,7 @@ class ProfileView extends StatelessWidget {
 
     return Scaffold(
       appBar: HomeHeader(
+        title: '',
         actions: headerActions,
         onActionPressed: (actionName) {
           if (actionName == 'logout') {
@@ -52,13 +57,33 @@ class ProfileView extends StatelessWidget {
           context,
           icon: Ri.user_settings_line,
           title: 'My Profile',
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider.value(
+                  value: context.read<EditProfileViewModel>(),
+                  child: const EditProfileView(),
+                ),
+              ),
+            );
+          },
         ),
         _buildProfileOption(
           context,
           icon: Ri.user_location_line,
           title: 'My Addresses',
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (_) => ChangeNotifierProvider.value(
+                  value: context.read<AddressViewModel>(),
+                  child: const ManageAddressesView(),
+                ),
+              ),
+            );
+          },
         ),
         _buildProfileOption(
           context,

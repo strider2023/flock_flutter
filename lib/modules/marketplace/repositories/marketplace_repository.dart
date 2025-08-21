@@ -10,13 +10,11 @@ class MarketplaceRepository {
   MarketplaceRepository({required this.authToken});
 
   // Simulates fetching the entire marketplace feed from an API.
-  Future<List<FeedSection>> getMarketplaceFeed() async {
+  Future<List<FeedSection>> getMarketplaceFeed({String? category}) async {
     // Simulate a network delay
     await Future.delayed(const Duration(milliseconds: 800));
 
-    // In a real app, this would be an API call.
-    // The data generation logic is moved here from the old widget.
-    return [
+    List<FeedSection> allSections = [
       CarouselSection(products: _getMockProducts(5)),
       CategoryProductSection(
         title: "🔥 Trending Now",
@@ -25,18 +23,23 @@ class MarketplaceRepository {
       BrandSection(title: "Top Brands", brands: _getMockBrands(5)),
       CategoryProductSection(
         title: "New Arrivals",
-        products: _getMockProducts(10),
+        products: _getMockProducts(10, offset: 10),
       ),
       BrandSection(
         title: "Featured Brands",
         brands: _getMockBrands(5, offset: 5),
       ),
     ];
+
+    if (category == null) {
+      return allSections;
+    }
+    return allSections;
   }
 
   Future<int> getActiveCampaignsCount() async {
     await Future.delayed(const Duration(milliseconds: 200));
-    return 25; // Return a dummy count
+    return 25;
   }
 
   // --- MOCK DATA GENERATION (Kept private within the repository) ---

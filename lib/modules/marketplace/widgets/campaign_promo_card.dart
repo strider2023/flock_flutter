@@ -21,7 +21,7 @@ class CampaignPromoCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(12),
         child: Card(
-          elevation: 0,
+          color: Color(0xffea6c56),
           clipBehavior: Clip.antiAlias,
           child: SizedBox(
             height: 140,
@@ -68,7 +68,7 @@ class CampaignPromoCard extends StatelessWidget {
                     fit: BoxFit.contain,
                     alignment: Alignment.bottomRight,
                     colorFilter: ColorFilter.mode(
-                      Color(0xffea6c56),
+                      Color(0xff5c0f24),
                       BlendMode.srcIn,
                     ),
                   ),

@@ -7,9 +7,13 @@ import '../repositories/marketplace_repository.dart';
 
 class MarketplaceViewModel extends ChangeNotifier {
   final MarketplaceRepository _repository;
+  final String? _initialCategory;
 
-  MarketplaceViewModel({required MarketplaceRepository repository})
-    : _repository = repository {
+  MarketplaceViewModel({
+    required MarketplaceRepository repository,
+    String? category, // ✨ ADDED
+  }) : _repository = repository,
+       _initialCategory = category {
     fetchMarketplaceData();
   }
 
@@ -46,7 +50,7 @@ class MarketplaceViewModel extends ChangeNotifier {
     try {
       // Fetch both sets of data in parallel
       final results = await Future.wait([
-        _repository.getMarketplaceFeed(),
+        _repository.getMarketplaceFeed(category: _initialCategory),
         _repository.getActiveCampaignsCount(),
       ]);
       _feedItems = results[0] as List<FeedSection>;

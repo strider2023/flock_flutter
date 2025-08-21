@@ -2,10 +2,15 @@ import 'package:flock_flutter/home.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'common/repositories/category_repository.dart';
+import 'common/viewmodels/category_viewmodel.dart';
 import 'common/viewmodels/navigation_viewmodel.dart';
+import 'modules/addresses/repositories/address_repository.dart';
+import 'modules/addresses/viewmodels/address_viewmodel.dart';
 import 'modules/auth/viewmodels/auth_viewmodel.dart';
 import 'modules/campaigns/repositories/campaign_repository.dart';
 import 'modules/campaigns/viewmodels/campaign_viewmodel.dart';
+import 'modules/profile/viewmodels/edit_profile_viewmodel.dart';
 import 'modules/favorites/repositories/favorites_repository.dart';
 import 'modules/favorites/viewmodels/favorites_viewmodel.dart';
 import 'modules/marketplace/repositories/marketplace_repository.dart';
@@ -44,6 +49,12 @@ class MainAppView extends StatelessWidget {
         Provider<NotificationRepository>(
           create: (_) => NotificationRepository(authToken: token),
         ),
+        Provider<AddressRepository>(
+          create: (_) => AddressRepository(authToken: token),
+        ),
+        Provider<CategoryRepository>(
+          create: (_) => CategoryRepository(authToken: token),
+        ),
 
         ChangeNotifierProvider<NavigationViewModel>(
           create: (_) => NavigationViewModel(),
@@ -76,6 +87,19 @@ class MainAppView extends StatelessWidget {
           create: (context) => NotificationViewModel(
             repository: context.read<NotificationRepository>(),
           ),
+        ),
+        ChangeNotifierProvider<AddressViewModel>(
+          create: (context) =>
+              AddressViewModel(repository: context.read<AddressRepository>()),
+        ),
+        ChangeNotifierProvider<EditProfileViewModel>(
+          create: (context) => EditProfileViewModel(
+            repository: context.read<ProfileRepository>(),
+          ),
+        ),
+        ChangeNotifierProvider<CategoryViewModel>(
+          create: (context) =>
+              CategoryViewModel(repository: context.read<CategoryRepository>()),
         ),
       ],
       // This child could be a Scaffold with a BottomNavigationBar

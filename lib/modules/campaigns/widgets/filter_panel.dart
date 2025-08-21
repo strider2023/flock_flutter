@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../../common/widgets/category_list.dart';
+
 class FilterPanel extends StatefulWidget {
   final String? initialCampaignFilter;
   final String? initialLikeSortOrder;
@@ -51,7 +53,12 @@ class _FilterPanelState extends State<FilterPanel> {
           const SizedBox(height: 18),
           Text('Categories', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 10),
-          _buildCategoryList(),
+          CategoryList(
+            onCategorySelected: (categoryId) {
+              debugPrint('Category selected: $categoryId');
+              // TODO: Wire up filter logic
+            },
+          ),
           const SizedBox(height: 28),
           Text('Campaigns', style: Theme.of(context).textTheme.titleSmall),
           const SizedBox(height: 10),
@@ -122,47 +129,6 @@ class _FilterPanelState extends State<FilterPanel> {
           ),
           const SizedBox(height: 18),
         ],
-      ),
-    );
-  }
-
-  Widget _buildCategoryList() {
-    final categories = [
-      {'icon': Icons.lightbulb_outline, 'name': 'Tech'},
-      {'icon': Icons.brush, 'name': 'Art'},
-      {'icon': Icons.music_note, 'name': 'Music'},
-      {'icon': Icons.movie_creation_outlined, 'name': 'Film'},
-      {'icon': Icons.games_outlined, 'name': 'Games'},
-      {'icon': Icons.book_outlined, 'name': 'Books'},
-    ];
-
-    return SizedBox(
-      height: 100,
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        itemCount: categories.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 30,
-                  backgroundColor: Theme.of(context).primaryColor,
-                  child: Icon(
-                    categories[index]['icon'] as IconData,
-                    color: Color(0xFF232122),
-                    size: 30,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text(categories[index]['name'] as String),
-              ],
-            ),
-          );
-        },
       ),
     );
   }
