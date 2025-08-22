@@ -7,7 +7,9 @@ import '../models/campaign_item.dart';
 
 class FeedCard extends StatefulWidget {
   final FeedItem item;
-  const FeedCard({super.key, required this.item});
+  final VoidCallback onTap;
+
+  const FeedCard({super.key, required this.item, required this.onTap});
 
   @override
   State<FeedCard> createState() => _FeedCardState();
@@ -18,21 +20,25 @@ class _FeedCardState extends State<FeedCard> {
   Widget build(BuildContext context) {
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            _buildHeader(),
-            const SizedBox(height: 12),
-            _buildImage(), // ✨ CHANGED: Swapped carousel for a single image
-            const SizedBox(height: 12),
-            _buildInteractionBar(),
-            const SizedBox(height: 12),
-            _buildContentSection(),
-            const SizedBox(height: 8),
-            _buildDateStamp(),
-          ],
+      child: InkWell(
+        onTap: widget.onTap,
+        borderRadius: BorderRadius.circular(12.0),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _buildHeader(),
+              const SizedBox(height: 12),
+              _buildImage(), // ✨ CHANGED: Swapped carousel for a single image
+              const SizedBox(height: 12),
+              _buildInteractionBar(),
+              const SizedBox(height: 12),
+              _buildContentSection(),
+              const SizedBox(height: 8),
+              _buildDateStamp(),
+            ],
+          ),
         ),
       ),
     );
@@ -67,7 +73,6 @@ class _FeedCardState extends State<FeedCard> {
     );
   }
 
-  /// ✨ RENAMED & UPDATED: Builds a single image with rounded corners and an overlay chip.
   Widget _buildImage() {
     final daysPending = widget.item.campaignEndDate
         .difference(DateTime.now())
@@ -124,11 +129,6 @@ class _FeedCardState extends State<FeedCard> {
             _buildInteractionButton(
               icon: Ri.hand_heart_line,
               label: '${widget.item.likeCount}',
-            ),
-            const SizedBox(width: 16),
-            _buildInteractionButton(
-              icon: Ri.chat_1_line,
-              label: '${widget.item.commentCount}',
             ),
             const SizedBox(width: 16),
             _buildInteractionButton(icon: Ri.share_forward_line, label: ''),

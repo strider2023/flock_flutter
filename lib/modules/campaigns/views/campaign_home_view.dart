@@ -10,10 +10,12 @@ import '../../../common/viewmodels/category_viewmodel.dart';
 import '../../../common/widgets/app_carousel.dart';
 import '../../../common/widgets/home_header.dart';
 import '../models/carousel_item.dart';
+import '../repositories/campaign_repository.dart';
 import '../viewmodels/campaign_viewmodel.dart';
 import '../widgets/carousel_item_card.dart';
 import '../widgets/feed_item_card.dart';
 import '../widgets/filter_panel.dart';
+import 'campaign_detail_view.dart';
 
 class CampaignHomeView extends StatelessWidget {
   const CampaignHomeView({super.key});
@@ -43,7 +45,7 @@ class CampaignHomeView extends StatelessWidget {
           if (viewModel.isLoading) {
             return const Center(child: CircularProgressIndicator());
           }
-          return _buildFeedList(viewModel);
+          return _buildFeedList(context, viewModel);
         },
       ),
     );
@@ -72,11 +74,27 @@ class CampaignHomeView extends StatelessWidget {
     }
   }
 
-  Widget _buildFeedList(FeedViewModel viewModel) {
+  Widget _buildFeedList(BuildContext context, FeedViewModel viewModel) {
     return ListView(
       children: [
         _buildCarousel(viewModel),
-        ...viewModel.feedItems.map((item) => FeedCard(item: item)),
+        ...viewModel.feedItems.map((item) {
+          // ✨ UPDATED: The FeedCard now has an onTap handler.
+          return FeedCard(
+            item: item,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => Provider.value(
+                    value: context.read<CampaignRepository>(),
+                    child: CampaignDetailView(campaignId: item.id),
+                  ),
+                ),
+              );
+            },
+          );
+        }),
       ],
     );
   }

@@ -123,4 +123,12 @@ final ThemeData lightTheme = ThemeData(
       const IconThemeData(color: Color(0xFF232122)),
     ),
   ),
+  bottomAppBarTheme: const BottomAppBarTheme(
+    color: secondaryTomato,
+    elevation: 0,
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: primaryYellow,
+    foregroundColor: lightText, // Black text/icon on yellow button
+  ),
 );

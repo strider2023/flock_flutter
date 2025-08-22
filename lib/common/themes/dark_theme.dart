@@ -126,4 +126,12 @@ final ThemeData darkTheme = ThemeData(
     elevation: 5.0,
     showDragHandle: true,
   ),
+  bottomAppBarTheme: const BottomAppBarTheme(
+    color: Color(0xff323f76), // Use a slightly lighter dark color
+    elevation: 0,
+  ),
+  floatingActionButtonTheme: FloatingActionButtonThemeData(
+    backgroundColor: primaryYellow,
+    foregroundColor: lightText, // Black text/icon on yellow button
+  ),
 );
