@@ -1,48 +1,71 @@
 import 'package:flutter/foundation.dart';
 
+import '../models/mock_auth_models.dart';
 import '../repositories/auth_repository.dart';
 
-// Represents the possible authentication states of the app.
-enum AuthState { unknown, authenticated, unauthenticated }
+enum AuthState {
+  unknown,
+  authenticated,
+  unauthenticated,
+  emailConfirmationRequired,
+  passwordResetRequested,
+}
 
 class AuthViewModel extends ChangeNotifier {
   final AuthRepository _repository;
   AuthState _authState = AuthState.unknown;
-  String? _token;
+  AuthSession? _session;
+  String? _pendingEmail;
 
   AuthViewModel({required AuthRepository repository})
     : _repository = repository {
     _checkAuthStatus();
   }
 
-  // Getters
   AuthState get authState => _authState;
-  String? get token => _token;
+  AuthSession? get session => _session;
+  AuthUser? get user => _session?.user;
+  String? get token => _session?.accessToken;
+  String? get pendingEmail => _pendingEmail;
 
-  // Checks for a token when the app starts.
   Future<void> _checkAuthStatus() async {
-    _token = await _repository.getToken();
-    if (_token != null) {
-      _authState = AuthState.authenticated;
-    } else {
-      _authState = AuthState.unauthenticated;
-    }
+    _session = await _repository.getCurrentSession();
+    _authState = _session == null
+        ? AuthState.unauthenticated
+        : AuthState.authenticated;
     notifyListeners();
   }
 
-  // Called after a successful login.
-  Future<void> login(String userToken) async {
-    await _repository.saveToken(userToken);
-    _token = userToken;
+  Future<void> setSession(AuthSession session) async {
+    _session = session;
+    _pendingEmail = null;
     _authState = AuthState.authenticated;
     notifyListeners();
   }
 
-  // Called from the ProfileViewModel or settings page.
-  Future<void> logout() async {
-    await _repository.deleteToken();
-    _token = null;
+  void requireEmailConfirmation(String email) {
+    _session = null;
+    _pendingEmail = email;
+    _authState = AuthState.emailConfirmationRequired;
+    notifyListeners();
+  }
+
+  void passwordResetRequested(String email) {
+    _session = null;
+    _pendingEmail = email;
+    _authState = AuthState.passwordResetRequested;
+    notifyListeners();
+  }
+
+  void showUnauthenticated() {
+    _session = null;
+    _pendingEmail = null;
     _authState = AuthState.unauthenticated;
     notifyListeners();
+  }
+
+  Future<void> logout() async {
+    await _repository.signOut();
+    showUnauthenticated();
   }
 }

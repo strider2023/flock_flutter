@@ -18,7 +18,7 @@ class DatabaseHelper {
 
   Future<Database> _initDb() async {
     Directory documentsDirectory = await getApplicationDocumentsDirectory();
-    String path = documentsDirectory.path + "/flock.db";
+    String path = "${documentsDirectory.path}/flock.db";
     return await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 

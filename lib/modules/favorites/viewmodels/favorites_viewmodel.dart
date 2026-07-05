@@ -27,8 +27,9 @@ class FavoritesViewModel extends ChangeNotifier {
 
   // --- PUBLIC METHODS ---
   void selectTab(FavoritesTab tab) {
-    if (_selectedTab == tab)
+    if (_selectedTab == tab) {
       return; // Do nothing if the tab is already selected
+    }
     _selectedTab = tab;
     // Fetch the data for the newly selected tab
     fetchItemsForCurrentTab();

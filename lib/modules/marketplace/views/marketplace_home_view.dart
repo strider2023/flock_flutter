@@ -127,7 +127,10 @@ class MarketplaceHomeView extends StatelessWidget {
     );
   }
 
-  _buildCategoryOptions(BuildContext context, MarketplaceViewModel viewModel) {
+  Column _buildCategoryOptions(
+    BuildContext context,
+    MarketplaceViewModel viewModel,
+  ) {
     return Column(
       children: [
         CampaignPromoCard(

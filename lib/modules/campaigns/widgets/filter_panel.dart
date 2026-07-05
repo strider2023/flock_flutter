@@ -98,7 +98,7 @@ class _FilterPanelState extends State<FilterPanel> {
               },
               activeColor: Colors.black,
             );
-          }).toList(),
+          }),
           const SizedBox(height: 36),
           Row(
             children: [

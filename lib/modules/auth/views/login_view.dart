@@ -172,7 +172,9 @@ class _LoginViewState extends State<LoginView>
         Align(
           alignment: Alignment.centerRight,
           child: TextButton(
-            onPressed: () {},
+            onPressed: viewModel.isLoading
+                ? null
+                : () => _showResetPasswordSheet(context, viewModel),
             child: const Text('Forgot Password?'),
           ),
         ),
@@ -201,6 +203,15 @@ class _LoginViewState extends State<LoginView>
               textAlign: TextAlign.center,
             ),
           ),
+        if (viewModel.successMessage != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: Text(
+              viewModel.successMessage!,
+              style: TextStyle(color: Theme.of(context).primaryColor),
+              textAlign: TextAlign.center,
+            ),
+          ),
         const SizedBox(height: 24),
 
         // ✨ ADDED: Social Login Divider & Buttons
@@ -218,9 +229,15 @@ class _LoginViewState extends State<LoginView>
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            SocialLoginButton(type: 'Google', onPressed: () {}),
+            SocialLoginButton(
+              type: 'Google',
+              onPressed: () => viewModel.showSocialAuthUnavailable('Google'),
+            ),
             const SizedBox(width: 16),
-            SocialLoginButton(type: 'Apple', onPressed: () {}),
+            SocialLoginButton(
+              type: 'Apple',
+              onPressed: () => viewModel.showSocialAuthUnavailable('Apple'),
+            ),
           ],
         ),
         const SizedBox(height: 12),
@@ -236,6 +253,49 @@ class _LoginViewState extends State<LoginView>
           ],
         ),
       ],
+    );
+  }
+
+  void _showResetPasswordSheet(BuildContext context, LoginViewModel viewModel) {
+    showModalBottomSheet(
+      context: context,
+      isScrollControlled: true,
+      builder: (sheetContext) {
+        return Padding(
+          padding: EdgeInsets.fromLTRB(
+            24,
+            24,
+            24,
+            MediaQuery.of(sheetContext).viewInsets.bottom + 24,
+          ),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Reset password',
+                style: Theme.of(sheetContext).textTheme.headlineSmall,
+              ),
+              const SizedBox(height: 12),
+              const Text('Enter your account email to receive reset steps.'),
+              const SizedBox(height: 16),
+              TextField(
+                controller: viewModel.emailController,
+                keyboardType: TextInputType.emailAddress,
+                decoration: const InputDecoration(labelText: 'Email'),
+              ),
+              const SizedBox(height: 24),
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.of(sheetContext).pop();
+                  viewModel.resetPassword();
+                },
+                child: const Text('Send Reset Instructions'),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

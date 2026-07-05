@@ -115,6 +115,13 @@ class _SignUpViewState extends State<SignUpView> {
             ),
           ),
         ),
+        const SizedBox(height: 16),
+
+        TextField(
+          controller: viewModel.confirmPasswordController,
+          obscureText: !_isPasswordVisible,
+          decoration: const InputDecoration(labelText: 'Confirm Password'),
+        ),
         const SizedBox(height: 24),
 
         // --- Sign Up Button ---
@@ -139,6 +146,15 @@ class _SignUpViewState extends State<SignUpView> {
             child: Text(
               viewModel.errorMessage!,
               style: const TextStyle(color: Colors.red),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        if (viewModel.successMessage != null)
+          Padding(
+            padding: const EdgeInsets.only(top: 16),
+            child: Text(
+              viewModel.successMessage!,
+              style: TextStyle(color: Theme.of(context).primaryColor),
               textAlign: TextAlign.center,
             ),
           ),

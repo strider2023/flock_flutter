@@ -19,6 +19,9 @@ class AuthWrapper extends StatelessWidget {
       case AuthState.unauthenticated:
         // If not, show the login page
         return const AuthPage();
+      case AuthState.emailConfirmationRequired:
+      case AuthState.passwordResetRequested:
+        return const AuthPage();
       case AuthState.unknown:
         return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
